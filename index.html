@@ -1,0 +1,1086 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ITe — Gestión de turnos por WhatsApp</title>
+  <meta name="description" content="Automatizá la gestión de turnos para tu organización con WhatsApp. Sin apps, sin esperas, sin complicaciones. Municipios, centros de salud, organismos públicos y más.">
+  <meta property="og:title" content="ITe — Gestión de turnos por WhatsApp">
+  <meta property="og:description" content="Plataforma de turnos conversacional para organizaciones públicas y privadas. Operativos ANSES en Jardín América y más.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://jardinamerica.ar">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>💜</text></svg>">
+  <style>
+    /* ── Variables ─────────────────────────────────────────── */
+    :root {
+      --purple:       #7c3aed;
+      --purple-dark:  #5b21b6;
+      --purple-light: #ede9fe;
+      --purple-mid:   #8b5cf6;
+      --blue-ar:      #0055A4;
+      --green-wa:     #25d366;
+      --green-wa-dk:  #128c4a;
+      --teal:         #0d9488;
+      --amber:        #d97706;
+      --text:         #1f2937;
+      --muted:        #6b7280;
+      --border:       #e5e7eb;
+      --bg-alt:       #f9fafb;
+      --radius:       12px;
+      --shadow:       0 2px 16px rgba(0,0,0,.08);
+      --shadow-md:    0 4px 24px rgba(0,0,0,.12);
+    }
+
+    /* ── Reset ─────────────────────────────────────────────── */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      color: var(--text);
+      line-height: 1.6;
+      background: #fff;
+    }
+    img { max-width: 100%; }
+    a { color: inherit; text-decoration: none; }
+
+    /* ── Layout helpers ────────────────────────────────────── */
+    .container   { max-width: 1060px; margin: 0 auto; padding: 0 1.25rem; }
+    .section     { padding: 4.5rem 0; }
+    .section-alt { background: var(--bg-alt); }
+    .section-title {
+      font-size: clamp(1.5rem, 4vw, 2.1rem);
+      font-weight: 800;
+      text-align: center;
+      margin-bottom: .5rem;
+    }
+    .section-sub {
+      text-align: center;
+      color: var(--muted);
+      margin-bottom: 2.75rem;
+      font-size: 1rem;
+      max-width: 580px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+    .grid-3 { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 1.25rem; }
+    .grid-2 { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1.1rem; }
+    .grid-4 { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1rem; }
+
+    /* ── Badges ────────────────────────────────────────────── */
+    .badge {
+      display: inline-block;
+      padding: .25rem .75rem;
+      border-radius: 99px;
+      font-size: .78rem;
+      font-weight: 700;
+      letter-spacing: .04em;
+    }
+    .badge-purple { background: var(--purple-light); color: var(--purple-dark); }
+    .badge-green  { background: #d1fae5; color: #065f46; }
+    .badge-amber  { background: #fef3c7; color: #92400e; }
+
+    /* ── Navbar ────────────────────────────────────────────── */
+    .navbar {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: rgba(255,255,255,.93);
+      backdrop-filter: blur(10px);
+      border-bottom: 1px solid var(--border);
+      padding: .85rem 0;
+    }
+    .navbar .container {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1rem;
+    }
+    .navbar-brand {
+      font-weight: 800;
+      font-size: 1.15rem;
+      color: var(--purple);
+      display: flex;
+      align-items: center;
+      gap: .4rem;
+    }
+    .navbar-links { display: flex; gap: 1.5rem; font-size: .88rem; }
+    .navbar-links a { color: var(--muted); transition: color .2s; }
+    .navbar-links a:hover { color: var(--purple); }
+    .btn-wa-nav {
+      background: var(--green-wa);
+      color: #fff;
+      padding: .45rem 1rem;
+      border-radius: 8px;
+      font-size: .85rem;
+      font-weight: 600;
+      white-space: nowrap;
+      transition: background .2s;
+    }
+    .btn-wa-nav:hover { background: var(--green-wa-dk); }
+
+    /* ── Hero ──────────────────────────────────────────────── */
+    .hero {
+      background: linear-gradient(140deg, var(--purple-dark) 0%, var(--purple) 55%, #a855f7 100%);
+      color: #fff;
+      padding: 5.5rem 0 4.5rem;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+    .hero::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.04'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+    }
+    .hero-badge {
+      display: inline-block;
+      background: rgba(255,255,255,.18);
+      border: 1px solid rgba(255,255,255,.35);
+      padding: .3rem 1rem;
+      border-radius: 99px;
+      font-size: .8rem;
+      font-weight: 600;
+      letter-spacing: .04em;
+      margin-bottom: 1.5rem;
+    }
+    .hero h1 {
+      font-size: clamp(2.1rem, 6vw, 3.4rem);
+      font-weight: 800;
+      line-height: 1.12;
+      margin-bottom: 1.1rem;
+      text-shadow: 0 2px 12px rgba(0,0,0,.18);
+    }
+    .hero h1 span { opacity: .85; }
+    .hero-desc {
+      font-size: clamp(1rem, 2.5vw, 1.2rem);
+      opacity: .9;
+      max-width: 580px;
+      margin: 0 auto 2.25rem;
+      line-height: 1.65;
+    }
+    .hero-cta { display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap; }
+    .btn-primary {
+      display: inline-flex;
+      align-items: center;
+      gap: .5rem;
+      background: var(--green-wa);
+      color: #fff;
+      padding: .9rem 1.85rem;
+      border-radius: 10px;
+      font-weight: 700;
+      font-size: 1.05rem;
+      box-shadow: 0 4px 20px rgba(0,0,0,.25);
+      transition: transform .15s, background .2s;
+    }
+    .btn-primary:hover { background: var(--green-wa-dk); transform: translateY(-2px); }
+    .btn-secondary {
+      display: inline-flex;
+      align-items: center;
+      gap: .5rem;
+      background: rgba(255,255,255,.15);
+      color: #fff;
+      padding: .9rem 1.85rem;
+      border-radius: 10px;
+      font-weight: 600;
+      font-size: 1.05rem;
+      border: 2px solid rgba(255,255,255,.4);
+      transition: background .2s;
+    }
+    .btn-secondary:hover { background: rgba(255,255,255,.28); }
+    .hero-note {
+      margin-top: 1.5rem;
+      font-size: .82rem;
+      opacity: .65;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 1.25rem;
+      flex-wrap: wrap;
+    }
+    .hero-note span { display: flex; align-items: center; gap: .3rem; }
+
+    /* ── Stats bar ─────────────────────────────────────────── */
+    .stats-bar {
+      background: #fff;
+      border-bottom: 1px solid var(--border);
+      padding: 1.75rem 0;
+    }
+    .stats-bar .container {
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 2.5rem;
+    }
+    .stat-item { text-align: center; }
+    .stat-num {
+      font-size: 1.75rem;
+      font-weight: 800;
+      color: var(--purple);
+      line-height: 1;
+    }
+    .stat-label {
+      font-size: .8rem;
+      color: var(--muted);
+      margin-top: .2rem;
+    }
+
+    /* ── Use Cases ─────────────────────────────────────────── */
+    .usecase-card {
+      background: #fff;
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 1.6rem 1.5rem;
+      box-shadow: var(--shadow);
+      transition: border-color .2s, transform .15s, box-shadow .2s;
+      display: flex;
+      flex-direction: column;
+      gap: .6rem;
+    }
+    .usecase-card:hover {
+      border-color: var(--purple);
+      transform: translateY(-3px);
+      box-shadow: var(--shadow-md);
+    }
+    .usecase-icon { font-size: 2rem; }
+    .usecase-card h3 { font-size: 1rem; font-weight: 700; }
+    .usecase-card p  { font-size: .875rem; color: var(--muted); line-height: 1.55; flex: 1; }
+    .usecase-tag {
+      font-size: .75rem;
+      font-weight: 600;
+      color: var(--purple);
+      background: var(--purple-light);
+      padding: .15rem .6rem;
+      border-radius: 99px;
+      display: inline-block;
+      width: fit-content;
+    }
+
+    /* ── Feature list ──────────────────────────────────────── */
+    .feature-card {
+      background: #fff;
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 1.4rem 1.5rem;
+      display: flex;
+      align-items: flex-start;
+      gap: 1rem;
+      box-shadow: var(--shadow);
+    }
+    .feature-icon {
+      width: 2.75rem;
+      height: 2.75rem;
+      background: var(--purple-light);
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.3rem;
+      flex-shrink: 0;
+    }
+    .feature-card h3 { font-size: .97rem; font-weight: 700; margin-bottom: .2rem; }
+    .feature-card p  { font-size: .86rem; color: var(--muted); }
+
+    /* ── Steps ─────────────────────────────────────────────── */
+    .step-card {
+      background: #fff;
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      padding: 1.75rem 1.5rem;
+      text-align: center;
+      border: 1px solid var(--border);
+    }
+    .step-num {
+      width: 2.5rem; height: 2.5rem;
+      background: var(--purple-light);
+      color: var(--purple);
+      border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      font-weight: 800; font-size: 1.1rem;
+      margin: 0 auto 1rem;
+    }
+    .step-icon { font-size: 2.2rem; margin-bottom: .75rem; }
+    .step-card h3 { font-size: 1.05rem; font-weight: 700; margin-bottom: .4rem; }
+    .step-card p  { font-size: .9rem; color: var(--muted); }
+    .step-arrow { display: none; color: var(--purple); font-size: 1.5rem; align-self: center; }
+    @media (min-width: 720px) {
+      .steps-grid {
+        display: grid;
+        grid-template-columns: 1fr auto 1fr auto 1fr;
+        gap: .75rem;
+        align-items: start;
+      }
+      .step-arrow { display: flex; }
+    }
+
+    /* ── Trámites ───────────────────────────────────────────── */
+    .tramite-card {
+      background: #fff;
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 1.2rem 1.4rem;
+      display: flex;
+      align-items: flex-start;
+      gap: 1rem;
+      box-shadow: var(--shadow);
+      transition: border-color .2s, transform .15s;
+    }
+    .tramite-card:hover { border-color: var(--purple); transform: translateY(-2px); }
+    .tramite-icon { font-size: 1.8rem; flex-shrink: 0; width: 2.5rem; text-align: center; }
+    .tramite-card h3 { font-size: .95rem; font-weight: 700; margin-bottom: .2rem; }
+    .tramite-card p  { font-size: .85rem; color: var(--muted); }
+
+    /* ── Highlight box ─────────────────────────────────────── */
+    .highlight-box {
+      background: linear-gradient(135deg, var(--purple-light) 0%, #f3e8ff 100%);
+      border: 1px solid #c4b5fd;
+      border-radius: var(--radius);
+      padding: 2rem 2.25rem;
+      display: flex;
+      gap: 1.5rem;
+      align-items: flex-start;
+    }
+    .highlight-icon { font-size: 2.25rem; flex-shrink: 0; }
+    .highlight-box h3 { font-weight: 700; margin-bottom: .4rem; color: var(--purple-dark); font-size: 1.1rem; }
+    .highlight-box p  { color: #4c1d95; font-size: .92rem; line-height: 1.6; }
+
+    /* ── Org CTA ────────────────────────────────────────────── */
+    .org-cta {
+      background: #0f172a;
+      color: #fff;
+      border-radius: 16px;
+      padding: 3rem 2.5rem;
+      display: grid;
+      grid-template-columns: 1fr auto;
+      gap: 2rem;
+      align-items: center;
+    }
+    .org-cta h3 {
+      font-size: clamp(1.25rem, 3vw, 1.6rem);
+      font-weight: 800;
+      margin-bottom: .5rem;
+    }
+    .org-cta p { color: #94a3b8; font-size: .95rem; }
+    .btn-light {
+      background: #fff;
+      color: var(--purple-dark);
+      padding: .85rem 1.75rem;
+      border-radius: 10px;
+      font-weight: 700;
+      font-size: 1rem;
+      white-space: nowrap;
+      transition: background .2s, transform .15s;
+      display: inline-flex;
+      align-items: center;
+      gap: .5rem;
+    }
+    .btn-light:hover { background: var(--purple-light); transform: translateY(-2px); }
+    @media (max-width: 680px) {
+      .org-cta { grid-template-columns: 1fr; }
+      .btn-light { width: 100%; justify-content: center; }
+    }
+
+    /* ── FAQ ────────────────────────────────────────────────── */
+    .faq-item { border-bottom: 1px solid var(--border); }
+    .faq-item:first-child { border-top: 1px solid var(--border); }
+    .faq-q {
+      width: 100%; background: none; border: none;
+      text-align: left; padding: 1.1rem 0;
+      font-size: .97rem; font-weight: 600;
+      cursor: pointer;
+      display: flex; justify-content: space-between; align-items: center;
+      gap: 1rem; color: var(--text);
+    }
+    .faq-q .arrow { transition: transform .25s; font-size: 1rem; color: var(--purple); flex-shrink: 0; }
+    .faq-item.open .arrow { transform: rotate(180deg); }
+    .faq-a {
+      display: none;
+      padding: 0 0 1.1rem;
+      font-size: .9rem; color: var(--muted); line-height: 1.65;
+    }
+    .faq-item.open .faq-a { display: block; }
+
+    /* ── CTA final ─────────────────────────────────────────── */
+    .cta-final {
+      background: linear-gradient(135deg, var(--purple-dark), var(--purple));
+      color: #fff; text-align: center; padding: 4.5rem 0;
+    }
+    .cta-final h2 { font-size: clamp(1.6rem, 4vw, 2.3rem); font-weight: 800; margin-bottom: .75rem; }
+    .cta-final p  { opacity: .85; margin-bottom: 2rem; font-size: 1rem; max-width: 500px; margin-left: auto; margin-right: auto; margin-bottom: 2rem; }
+
+    /* ── Footer ─────────────────────────────────────────────── */
+    footer {
+      background: #0f172a;
+      color: #64748b;
+      padding: 2.25rem 0;
+      font-size: .85rem;
+    }
+    footer .container {
+      display: flex; flex-wrap: wrap;
+      justify-content: space-between; align-items: center; gap: 1rem;
+    }
+    footer a { color: #64748b; }
+    footer a:hover { color: #fff; }
+    .footer-brand { color: #fff; font-weight: 700; font-size: .95rem; }
+    .footer-links { display: flex; gap: 1.25rem; flex-wrap: wrap; }
+
+    /* ── WhatsApp float ─────────────────────────────────────── */
+    .wa-float {
+      position: fixed; bottom: 1.5rem; right: 1.5rem; z-index: 200;
+      background: var(--green-wa); color: #fff;
+      width: 3.5rem; height: 3.5rem; border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      box-shadow: 0 4px 20px rgba(37,211,102,.5);
+      transition: transform .2s, background .2s; font-size: 1.6rem;
+    }
+    .wa-float:hover { transform: scale(1.1); background: var(--green-wa-dk); }
+
+    /* ── Divider ────────────────────────────────────────────── */
+    .divider-label {
+      text-align: center;
+      position: relative;
+      margin: 1rem 0 2.5rem;
+    }
+    .divider-label::before {
+      content: '';
+      position: absolute;
+      top: 50%; left: 0; right: 0;
+      height: 1px; background: var(--border);
+    }
+    .divider-label span {
+      position: relative;
+      background: #fff;
+      padding: 0 1rem;
+      font-size: .8rem;
+      color: var(--muted);
+      font-weight: 600;
+      letter-spacing: .06em;
+      text-transform: uppercase;
+    }
+
+    /* ── Cartelera Banner ────────────────────────────────────── */
+    .cartelera-card {
+      background: linear-gradient(135deg, #f5f3ff 0%, #ede9fe 100%);
+      border: 2px solid #ddd6fe;
+      border-radius: 16px;
+      padding: 2.5rem;
+      display: grid;
+      grid-template-columns: 1fr 220px;
+      gap: 2rem;
+      align-items: center;
+      box-shadow: var(--shadow-md);
+      position: relative;
+      overflow: hidden;
+    }
+    .cartelera-content h2 {
+      font-size: clamp(1.4rem, 3.5vw, 1.8rem);
+      font-weight: 800;
+      color: var(--purple-dark);
+      margin-bottom: 0.5rem;
+    }
+    .cartelera-content p {
+      color: #4c1d95;
+      font-size: 0.95rem;
+      line-height: 1.6;
+      max-width: 640px;
+    }
+    .btn-cartelera {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      background: var(--purple);
+      color: #fff;
+      padding: 0.8rem 1.6rem;
+      border-radius: 10px;
+      font-weight: 700;
+      font-size: 0.95rem;
+      box-shadow: 0 4px 14px rgba(124, 58, 237, 0.35);
+      transition: background 0.2s, transform 0.15s;
+    }
+    .btn-cartelera:hover {
+      background: var(--purple-dark);
+      transform: translateY(-2px);
+    }
+    .cartelera-preview {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 0.75rem;
+      position: relative;
+      height: 120px;
+    }
+    .preview-flyer {
+      width: 70px;
+      height: 90px;
+      background: #fff;
+      border-radius: 8px;
+      border: 2px solid var(--border);
+      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 2.2rem;
+      position: absolute;
+      transition: transform 0.3s;
+    }
+    .preview-flyer.f1 {
+      transform: rotate(-10deg) translate(-40px, -5px);
+      z-index: 1;
+    }
+    .preview-flyer.f2 {
+      transform: rotate(5deg) translate(0px, 5px);
+      z-index: 3;
+      border-color: var(--purple);
+      box-shadow: 0 6px 15px rgba(124, 58, 237, 0.2);
+    }
+    .preview-flyer.f3 {
+      transform: rotate(15deg) translate(40px, -10deg);
+      z-index: 2;
+    }
+    .cartelera-card:hover .preview-flyer.f1 {
+      transform: rotate(-18deg) translate(-50px, -10px) scale(1.05);
+    }
+    .cartelera-card:hover .preview-flyer.f2 {
+      transform: rotate(0deg) translate(0px, 0px) scale(1.1);
+    }
+    .cartelera-card:hover .preview-flyer.f3 {
+      transform: rotate(22deg) translate(50px, -15px) scale(1.05);
+    }
+    @media (max-width: 768px) {
+      .cartelera-card {
+        grid-template-columns: 1fr;
+        padding: 2rem 1.5rem;
+        text-align: center;
+      }
+      .cartelera-content p {
+        margin: 0 auto;
+      }
+      .cartelera-preview {
+        display: none;
+      }
+    }
+
+    /* ── Responsive ─────────────────────────────────────────── */
+    @media (max-width: 600px) {
+      .navbar-links { display: none; }
+      .section { padding: 3rem 0; }
+      .highlight-box { flex-direction: column; gap: .75rem; }
+      .stat-num { font-size: 1.5rem; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- Números de WhatsApp -->
+<script>
+  const WA_BOT   = '5493743434312'; // Bot Jardín América — turnos ANSES
+  const WA_ADMIN = '5493743454291'; // Superadmin — contacto organizaciones
+</script>
+
+<!-- ── Navbar ───────────────────────────────────────────────── -->
+<nav class="navbar">
+  <div class="container">
+    <a class="navbar-brand" href="#">💜 ITe</a>
+    <div class="navbar-links">
+      <a href="#casos-de-uso">Casos de uso</a>
+      <a href="#como-funciona">Cómo funciona</a>
+      <a href="#para-organizaciones">Para organizaciones</a>
+      <a href="#faq">FAQ</a>
+      <a href="tablero.html" style="font-weight: 700; color: var(--purple);">✨ Cartelera Local</a>
+    </div>
+    <a class="btn-wa-nav" href="#" onclick="irAlBot('Hola! Quiero pedir un turno'); return false;">
+      📲 Pedir turno
+    </a>
+  </div>
+</nav>
+
+<!-- ── Hero ─────────────────────────────────────────────────── -->
+<section class="hero">
+  <div class="container">
+    <span class="hero-badge">🇦🇷 Jardín América, Misiones — y donde lo necesites</span>
+    <h1>Turnos por WhatsApp<br><span>sin apps, sin filas, sin vueltas</span></h1>
+    <p class="hero-desc">
+      Automatizamos la gestión de turnos de organismos públicos y privados a través de WhatsApp.
+      Sin registros, sin descargas. Tu comunidad ya tiene el canal instalado.
+    </p>
+    <div class="hero-cta">
+      <a class="btn-primary" href="#" onclick="irAlBot('Hola! Quiero pedir un turno para ANSES'); return false;">
+        💬 Pedir turno — Operativo ANSES
+      </a>
+      <a class="btn-secondary" href="#para-organizaciones">
+        🏛️ Quiero esto para mi organización
+      </a>
+    </div>
+    <p class="hero-note">
+      <span>✔ Gratis para el ciudadano</span>
+      <span>✔ Sin instalar nada</span>
+      <span>✔ Funciona 24/7</span>
+      <span>✔ Multi-organización</span>
+    </p>
+  </div>
+</section>
+
+<!-- ── Cartelera Banner ──────────────────────────────────────── -->
+<section class="section-alt" style="padding: 2.5rem 0 1rem 0; border-bottom: 1px solid var(--border);">
+  <div class="container">
+    <div class="cartelera-card">
+      <div class="cartelera-content">
+        <span class="badge badge-purple" style="margin-bottom: 0.75rem;">✨ CARTELERA COMUNITARIA</span>
+        <h2>Tablero de Emprendimientos y Profesionales</h2>
+        <p>
+          ¿Buscás un servicio en Jardín América? Explorá nuestra nueva cartelera digital de flyers interactivos. Encontrá profesionales, comercios y emprendedores locales y contactalos directamente por WhatsApp.
+        </p>
+        <div style="margin-top: 1.25rem;">
+          <a class="btn-cartelera" href="tablero.html">
+            🖼️ Ver Tablero de Flyers →
+          </a>
+        </div>
+      </div>
+      <div class="cartelera-preview">
+        <div class="preview-flyer f1">🩺</div>
+        <div class="preview-flyer f2">🍰</div>
+        <div class="preview-flyer f3">💼</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── Stats bar ─────────────────────────────────────────────── -->
+<div class="stats-bar">
+  <div class="container">
+    <div class="stat-item">
+      <div class="stat-num">100%</div>
+      <div class="stat-label">WhatsApp — canal que todos usan</div>
+    </div>
+    <div class="stat-item">
+      <div class="stat-num">&lt; 60s</div>
+      <div class="stat-label">Tiempo medio para sacar un turno</div>
+    </div>
+    <div class="stat-item">
+      <div class="stat-num">24/7</div>
+      <div class="stat-label">Disponibilidad del bot</div>
+    </div>
+    <div class="stat-item">
+      <div class="stat-num">0</div>
+      <div class="stat-label">Apps a instalar por el usuario</div>
+    </div>
+  </div>
+</div>
+
+<!-- ── Casos de uso ───────────────────────────────────────────── -->
+<section class="section" id="casos-de-uso">
+  <div class="container">
+    <h2 class="section-title">¿Para quién sirve?</h2>
+    <p class="section-sub">
+      Cualquier organización que gestione turnos, citas o filas puede automatizar el proceso
+      con un bot conversacional. Sin formularios web, sin llamadas telefónicas.
+    </p>
+
+    <div class="grid-3">
+
+      <div class="usecase-card">
+        <div class="usecase-icon">🏛️</div>
+        <span class="usecase-tag">Gobierno Municipal</span>
+        <h3>Municipios y comunas</h3>
+        <p>Habilitación de negocios, renovación de licencias, asesorías de trámites municipales.
+           El ciudadano saca turno a cualquier hora sin llamar a la municipalidad.</p>
+      </div>
+
+      <div class="usecase-card">
+        <div class="usecase-icon">🏥</div>
+        <span class="usecase-tag">Salud Pública</span>
+        <h3>Centros de salud y CAPS</h3>
+        <p>Turnos médicos, vacunación, controles de rutina. Reduce llamadas al mostrador y
+           elimina las filas desde la madrugada.</p>
+      </div>
+
+      <div class="usecase-card">
+        <div class="usecase-icon">📋</div>
+        <span class="usecase-tag">Organismos Nacionales</span>
+        <h3>Operativos ANSES / RENAPER</h3>
+        <p>Organización de operativos itinerantes de organismos nacionales en localidades
+           del interior. Ya operativo en Jardín América.</p>
+      </div>
+
+      <div class="usecase-card">
+        <div class="usecase-icon">🎓</div>
+        <span class="usecase-tag">Educación</span>
+        <h3>Institutos y escuelas</h3>
+        <p>Inscripciones, reuniones de padres, entrega de documentación. Una sola interfaz
+           para que las familias coordinen con la institución.</p>
+      </div>
+
+      <div class="usecase-card">
+        <div class="usecase-icon">⚖️</div>
+        <span class="usecase-tag">Justicia / Defensa</span>
+        <h3>Defensorías y asistencia legal</h3>
+        <p>Atención prioritaria para trámites judiciales y asesoramiento. El sistema asigna
+           turnos y envía recordatorios automáticos.</p>
+      </div>
+
+      <div class="usecase-card">
+        <div class="usecase-icon">🤝</div>
+        <span class="usecase-tag">OSC / ONGs</span>
+        <h3>Organizaciones sociales</h3>
+        <p>Distribución de ayuda, talleres, asistencia comunitaria. Coordinación eficiente
+           sin necesidad de personal administrativo adicional.</p>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ── Funcionalidades clave ──────────────────────────────────── -->
+<section class="section section-alt">
+  <div class="container">
+    <h2 class="section-title">¿Qué hace el sistema?</h2>
+    <p class="section-sub">Una plataforma completa de gestión, no solo un bot de mensajes.</p>
+
+    <div class="grid-3">
+
+      <div class="feature-card">
+        <div class="feature-icon">🤖</div>
+        <div>
+          <h3>Bot conversacional 24/7</h3>
+          <p>Guía al ciudadano paso a paso: elige fecha, hora y tipo de trámite sin intervención humana.</p>
+        </div>
+      </div>
+
+      <div class="feature-card">
+        <div class="feature-icon">📊</div>
+        <div>
+          <h3>Panel admin web</h3>
+          <p>Visualizá la agenda, gestioná operativos y exportá datos desde cualquier dispositivo.</p>
+        </div>
+      </div>
+
+      <div class="feature-card">
+        <div class="feature-icon">🏢</div>
+        <div>
+          <h3>Multi-organización</h3>
+          <p>Gestioná múltiples áreas o sucursales desde un solo panel con bases de datos independientes.</p>
+        </div>
+      </div>
+
+      <div class="feature-card">
+        <div class="feature-icon">🔔</div>
+        <div>
+          <h3>Recordatorios automáticos</h3>
+          <p>El bot confirma el turno y puede enviar recordatorios antes del operativo para reducir ausentismo.</p>
+        </div>
+      </div>
+
+      <div class="feature-card">
+        <div class="feature-icon">📤</div>
+        <div>
+          <h3>Exportación de datos</h3>
+          <p>Descargá el listado de turnos en Excel o CSV para integrarlo con otros sistemas institucionales.</p>
+        </div>
+      </div>
+
+      <div class="feature-card">
+        <div class="feature-icon">🔒</div>
+        <div>
+          <h3>Privacidad y seguridad</h3>
+          <p>Datos mínimos, almacenamiento local, tokens con blacklist y acceso por roles diferenciados.</p>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ── Para organizaciones ────────────────────────────────────── -->
+<section class="section" id="para-organizaciones">
+  <div class="container">
+    <h2 class="section-title">Implementalo en tu organización</h2>
+    <p class="section-sub">
+      El sistema está diseñado para replicarse. Si gestionás turnos, citas o atención al público,
+      podemos adaptarlo a tu contexto.
+    </p>
+
+    <div class="org-cta">
+      <div>
+        <h3>¿Tu organización atiende al público?</h3>
+        <p>
+          Municipios, centros de salud, organismos nacionales y OSCs pueden implementar
+          el sistema. Contactanos y analizamos juntos cómo adaptarlo.
+        </p>
+      </div>
+      <a class="btn-light" href="#" onclick="irAlAdmin('Hola! Me interesa implementar el sistema de turnos para mi organización'); return false;">
+        💬 Hablemos
+      </a>
+    </div>
+
+    <br>
+
+    <div class="highlight-box" style="margin-top:1.5rem;">
+      <div class="highlight-icon">💡</div>
+      <div>
+        <h3>¿Por qué WhatsApp?</h3>
+        <p>
+          Argentina tiene una de las tasas de adopción de WhatsApp más altas del mundo.
+          Tu ciudadano ya lo tiene instalado, ya sabe usarlo y ya confía en él.
+          Llevarle los trámites al canal donde ya está es la decisión de mayor impacto
+          con la menor fricción posible.
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── Cómo funciona (ciudadano) ──────────────────────────────── -->
+<section class="section section-alt" id="como-funciona">
+  <div class="container">
+    <h2 class="section-title">Cómo funciona para el ciudadano</h2>
+    <p class="section-sub">Tres pasos, menos de un minuto, desde el celular que ya tienen.</p>
+
+    <div class="steps-grid">
+      <div class="step-card">
+        <div class="step-num">1</div>
+        <div class="step-icon">💬</div>
+        <h3>Escribe por WhatsApp</h3>
+        <p>El bot responde automáticamente las 24hs y guía al usuario desde el primer mensaje.</p>
+      </div>
+
+      <div class="step-arrow">→</div>
+
+      <div class="step-card">
+        <div class="step-num">2</div>
+        <div class="step-icon">🗓️</div>
+        <h3>Elige fecha y horario</h3>
+        <p>Selecciona el turno disponible que le convenga y completa sus datos en el chat.</p>
+      </div>
+
+      <div class="step-arrow">→</div>
+
+      <div class="step-card">
+        <div class="step-num">3</div>
+        <div class="step-icon">✅</div>
+        <h3>Se presenta el día</h3>
+        <p>Recibe confirmación con todos los detalles. Llega a la hora elegida con su DNI.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── Operativo ANSES (servicio activo) ───────────────────────── -->
+<section class="section" id="anses">
+  <div class="container">
+
+    <div class="divider-label">
+      <span>🇦🇷 Servicio activo — Jardín América, Misiones</span>
+    </div>
+
+    <h2 class="section-title">Operativos ANSES en Jardín América</h2>
+    <p class="section-sub">
+      Ya podés sacar turno para los operativos de ANSES que organizamos junto a la comunidad.
+      Gratis, sin salir del barrio.
+    </p>
+
+    <div class="grid-2">
+      <div class="tramite-card">
+        <div class="tramite-icon">📔</div>
+        <div>
+          <h3>Presentación de libretas</h3>
+          <p>Actualización y presentación de libretas de AUH y AUE.</p>
+        </div>
+      </div>
+      <div class="tramite-card">
+        <div class="tramite-icon">🏫</div>
+        <div>
+          <h3>Ayuda escolar anual</h3>
+          <p>Trámite del formulario para la asignación de ayuda escolar anual.</p>
+        </div>
+      </div>
+      <div class="tramite-card">
+        <div class="tramite-icon">🤰</div>
+        <div>
+          <h3>Asignación por embarazo</h3>
+          <p>Inicio o actualización del trámite de asignación por embarazo para protección social.</p>
+        </div>
+      </div>
+      <div class="tramite-card">
+        <div class="tramite-icon">🏛️</div>
+        <div>
+          <h3>CODEM</h3>
+          <p>Trámites relacionados al Complemento de Desempleo (CODEM).</p>
+        </div>
+      </div>
+      <div class="tramite-card">
+        <div class="tramite-icon">💬</div>
+        <div>
+          <h3>Consultas varias</h3>
+          <p>Consultas generales sobre prestaciones y trámites de ANSES.</p>
+        </div>
+      </div>
+      <div class="tramite-card" style="background:var(--bg-alt); border-style: dashed;">
+        <div class="tramite-icon">⚠️</div>
+        <div>
+          <h3>Sin préstamos</h3>
+          <p>Actualmente no se realizan trámites de préstamos ANSES en estos operativos.</p>
+        </div>
+      </div>
+    </div>
+
+    <br>
+    <div class="highlight-box">
+      <div class="highlight-icon">💜</div>
+      <div>
+        <h3>Somos un grupo independiente y voluntario</h3>
+        <p>
+          Trabajamos para mejorar la calidad de vida en Jardín América organizando los operativos
+          para que puedas hacer tus trámites sin viajar.
+          <strong>No somos ANSES</strong> y no podemos asesorarte sobre trámites ni montos particulares.
+          Para consultas técnicas comunicáte directamente con ANSES al <strong>130</strong>
+          o en <strong>anses.gob.ar</strong>. ¡Gracias por el apoyo! 🙏
+        </p>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ── FAQ ────────────────────────────────────────────────────── -->
+<section class="section section-alt" id="faq">
+  <div class="container">
+    <h2 class="section-title">Preguntas frecuentes</h2>
+    <p class="section-sub">Dudas comunes sobre el servicio y sobre la plataforma.</p>
+
+    <div style="max-width:700px; margin:0 auto;">
+
+      <div class="faq-item">
+        <button class="faq-q" onclick="toggleFaq(this)">
+          ¿El turno es gratuito para el ciudadano?
+          <span class="arrow">▼</span>
+        </button>
+        <div class="faq-a">
+          Sí, completamente gratuito. No cobramos nada por reservar ni por concurrir al operativo.
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-q" onclick="toggleFaq(this)">
+          ¿Cómo sé si hay fechas disponibles?
+          <span class="arrow">▼</span>
+        </button>
+        <div class="faq-a">
+          Escribile al bot por WhatsApp — te informa automáticamente si hay fechas abiertas y qué horarios quedan.
+          También avisamos por el mismo canal cuando abrimos nuevos operativos.
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-q" onclick="toggleFaq(this)">
+          ¿Puedo cancelar mi turno?
+          <span class="arrow">▼</span>
+        </button>
+        <div class="faq-a">
+          Sí. Escribile al bot la palabra <strong>CANCELAR</strong> y te pedirá tu DNI para liberar el turno.
+          Por favor cancelá si no podés ir para que otra persona pueda tomarlo.
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-q" onclick="toggleFaq(this)">
+          ¿El bot guarda mis datos personales?
+          <span class="arrow">▼</span>
+        </button>
+        <div class="faq-a">
+          Solo guardamos los datos necesarios para la reserva (nombre, apellido y DNI) y se usan
+          únicamente para organizar el operativo. No se comparten con terceros.
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-q" onclick="toggleFaq(this)">
+          ¿Pueden asesorarme sobre mi trámite de ANSES?
+          <span class="arrow">▼</span>
+        </button>
+        <div class="faq-a">
+          No. Somos un grupo independiente que organiza los operativos, no empleados de ANSES.
+          Para consultas sobre tu trámite llamá al <strong>130</strong> o ingresá a <strong>anses.gob.ar</strong>.
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-q" onclick="toggleFaq(this)">
+          ¿Cómo puede mi organización implementar este sistema?
+          <span class="arrow">▼</span>
+        </button>
+        <div class="faq-a">
+          Contactanos por WhatsApp indicando el tipo de organización y el volumen aproximado de turnos que gestionás.
+          Evaluamos juntos la factibilidad y la adaptación necesaria para tu caso.
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ── CTA Final ──────────────────────────────────────────────── -->
+<section class="cta-final">
+  <div class="container">
+    <h2>¿Listo para empezar?</h2>
+    <p>
+      Si sos ciudadano, sacá tu turno ahora mismo.<br>
+      Si representás una organización, hablemos.
+    </p>
+    <div style="display:flex; gap:1rem; justify-content:center; flex-wrap:wrap;">
+      <a class="btn-primary" href="#" onclick="irAlBot('Hola! Quiero pedir un turno para ANSES'); return false;"
+         style="display:inline-flex;">
+        💬 Pedir turno — Operativo ANSES
+      </a>
+      <a class="btn-secondary" href="#" onclick="irAlAdmin('Hola! Me interesa implementar el sistema para mi organización'); return false;"
+         style="display:inline-flex;">
+        🏛️ Quiero implementarlo
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- ── Footer ─────────────────────────────────────────────────── -->
+<footer>
+  <div class="container">
+    <div>
+      <span class="footer-brand">💜 ITe Jardín América</span><br>
+      Plataforma de turnos por WhatsApp · Jardín América, Misiones, Argentina
+    </div>
+    <div class="footer-links">
+      <a href="#casos-de-uso">Casos de uso</a>
+      <a href="#para-organizaciones">Organizaciones</a>
+      <a href="https://admin.ite.com.ar" style="font-size:.8rem;">Panel admin</a>
+      <span style="font-size:.75rem; color:#475569;">Desarrollado por Ite.ar</span>
+    </div>
+  </div>
+</footer>
+
+<!-- ── WhatsApp flotante ────────────────────────────────────────── -->
+<a class="wa-float" href="#" title="Contactar con ITe"
+   onclick="irAlAdmin('Hola! Me interesa saber más sobre ITe'); return false;">
+  <svg viewBox="0 0 24 24" fill="white" width="28" height="28" xmlns="http://www.w3.org/2000/svg">
+    <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/>
+    <path d="M12 0C5.373 0 0 5.373 0 12c0 2.117.553 4.103 1.522 5.83L.072 23.928l6.246-1.424A11.95 11.95 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 21.882a9.87 9.87 0 01-5.031-1.375l-.361-.214-3.706.846.878-3.601-.235-.371A9.844 9.844 0 012.118 12C2.118 6.548 6.548 2.118 12 2.118S21.882 6.548 21.882 12 17.452 21.882 12 21.882z"/>
+  </svg>
+</a>
+
+<script>
+  function _abrirWA(numero, texto) {
+    const url = `https://wa.me/${numero}?text=${encodeURIComponent(texto)}`;
+    window.open(url, '_blank', 'noopener');
+  }
+  // Botones "Pedir turno" → bot de Jardín América
+  function irAlBot(texto)   { _abrirWA(WA_BOT,   texto); }
+  // Botones de organizaciones + burbuja flotante → superadmin
+  function irAlAdmin(texto) { _abrirWA(WA_ADMIN, texto); }
+
+  function toggleFaq(btn) {
+    const item = btn.closest('.faq-item');
+    const isOpen = item.classList.contains('open');
+    document.querySelectorAll('.faq-item.open').forEach(el => el.classList.remove('open'));
+    if (!isOpen) item.classList.add('open');
+  }
+</script>
+
+</body>
+</html>
