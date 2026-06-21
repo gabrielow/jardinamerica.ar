@@ -175,7 +175,13 @@
       margin: 0 auto 2.25rem;
       line-height: 1.65;
     }
-    .hero-cta { display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap; }
+    .hero-cta { display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap; position: relative; z-index: 2; }
+    .hero-overlay-link {
+      position: absolute;
+      inset: 0;
+      z-index: 1;
+      cursor: pointer;
+    }
     .btn-primary {
       display: inline-flex;
       align-items: center;
@@ -635,7 +641,8 @@
 </nav>
 
 <!-- ── Hero ─────────────────────────────────────────────────── -->
-<section class="hero" style="cursor: pointer;" onclick="window.location.href='tablero.html';">
+<section class="hero">
+  <a href="tablero.html" class="hero-overlay-link" aria-label="Ver Tablero de Flyers"></a>
   <div class="container">
     <span class="hero-badge">📍 Jardín América, Misiones — Portal Comunitario</span>
     <h1>Cartelera de la Comunidad<br><span>profesionales, comercios y servicios</span></h1>
@@ -646,7 +653,7 @@
       <a class="btn-primary" href="tablero.html" style="background: var(--purple-mid); box-shadow: 0 4px 15px rgba(124, 58, 237, 0.35);">
         🖼️ Ver Tablero de Flyers
       </a>
-      <a class="btn-primary" href="#" onclick="event.stopPropagation(); irAlAdmin('Hola! Quiero publicar mi flyer'); return false;" style="background: var(--green-wa); box-shadow: 0 4px 15px rgba(37, 211, 102, 0.35);">
+      <a class="btn-primary" href="#" onclick="irAlAdmin('Hola! Quiero publicar mi flyer'); return false;" style="background: var(--green-wa); box-shadow: 0 4px 15px rgba(37, 211, 102, 0.35);">
         📲 Sumar mi Flyer Gratis
       </a>
     </div>
