@@ -553,7 +553,7 @@
       position: relative;
       height: 120px;
     }
-    .preview-flyer {
+    .preview-tarjeta {
       width: 70px;
       height: 90px;
       background: #fff;
@@ -567,27 +567,27 @@
       position: absolute;
       transition: transform 0.3s;
     }
-    .preview-flyer.f1 {
+    .preview-tarjeta.f1 {
       transform: rotate(-10deg) translate(-40px, -5px);
       z-index: 1;
     }
-    .preview-flyer.f2 {
+    .preview-tarjeta.f2 {
       transform: rotate(5deg) translate(0px, 5px);
       z-index: 3;
       border-color: var(--purple);
       box-shadow: 0 6px 15px rgba(124, 58, 237, 0.2);
     }
-    .preview-flyer.f3 {
+    .preview-tarjeta.f3 {
       transform: rotate(15deg) translate(40px, -10deg);
       z-index: 2;
     }
-    .cartelera-card:hover .preview-flyer.f1 {
+    .cartelera-card:hover .preview-tarjeta.f1 {
       transform: rotate(-18deg) translate(-50px, -10px) scale(1.05);
     }
-    .cartelera-card:hover .preview-flyer.f2 {
+    .cartelera-card:hover .preview-tarjeta.f2 {
       transform: rotate(0deg) translate(0px, 0px) scale(1.1);
     }
-    .cartelera-card:hover .preview-flyer.f3 {
+    .cartelera-card:hover .preview-tarjeta.f3 {
       transform: rotate(22deg) translate(50px, -15px) scale(1.05);
     }
     @media (max-width: 768px) {
@@ -624,7 +624,10 @@
 <!-- ── Navbar ───────────────────────────────────────────────── -->
 <nav class="navbar">
   <div class="container">
-    <a class="navbar-brand" href="#">💜 ITe</a>
+    <a class="navbar-brand" href="#" style="display: flex; align-items: center; gap: 0.5rem;">
+      <img src="assets/escudo_jardin_america.jpg" alt="Escudo" style="height: 28px; width: 28px; object-fit: contain; border-radius: 4px;">
+      ITe
+    </a>
     <div class="navbar-links">
       <a href="#casos-de-uso">Casos de uso</a>
       <a href="#como-funciona">Cómo funciona</a>
@@ -642,19 +645,22 @@
 
 <!-- ── Hero ─────────────────────────────────────────────────── -->
 <section class="hero">
-  <a href="tablero.html" class="hero-overlay-link" aria-label="Ver Tablero de Flyers"></a>
+  <a href="tablero.html" class="hero-overlay-link" aria-label="Ver Tablero de Tarjetas"></a>
   <div class="container">
+    <div style="margin-bottom: 1.25rem; display: flex; justify-content: center; position: relative; z-index: 2;">
+      <img src="assets/escudo_jardin_america.jpg" alt="Escudo de Jardín América" style="height: 90px; width: auto; border-radius: 10px; box-shadow: 0 6px 20px rgba(0,0,0,0.15); border: 2.5px solid rgba(255,255,255,0.45); transition: transform 0.3s;" onmouseover="this.style.transform='scale(1.05)'" onmouseout="this.style.transform='scale(1)'">
+    </div>
     <span class="hero-badge">📍 Jardín América, Misiones — Portal Comunitario</span>
     <h1>Cartelera de la Comunidad<br><span>profesionales, comercios y servicios</span></h1>
     <p class="hero-desc">
-      Explorá nuestra cartelera digital de flyers interactivos. Encontrá servicios y comercios locales en Jardín América y contactalos al instante por WhatsApp, directo y sin vueltas.
+      Explorá nuestra cartelera digital de tarjetas interactivas. Encontrá servicios y comercios locales en Jardín América y contactalos al instante por WhatsApp, directo y sin vueltas.
     </p>
     <div class="hero-cta">
       <a class="btn-primary" href="tablero.html" style="background: var(--purple-mid); box-shadow: 0 4px 15px rgba(124, 58, 237, 0.35);">
-        🖼️ Ver Tablero de Flyers
+        🖼️ Ver Tablero de Tarjetas
       </a>
-      <a class="btn-primary" href="#" onclick="irAlAdmin('Hola! Quiero publicar mi flyer'); return false;" style="background: var(--green-wa); box-shadow: 0 4px 15px rgba(37, 211, 102, 0.35);">
-        📲 Sumar mi Flyer Gratis
+      <a class="btn-primary" href="#" onclick="irAlAdmin('Hola! Quiero publicar mi tarjeta'); return false;" style="background: var(--green-wa); box-shadow: 0 4px 15px rgba(37, 211, 102, 0.35);">
+        📲 Sumar mi Tarjeta Gratis
       </a>
     </div>
     <p class="hero-note">
@@ -685,9 +691,9 @@
         </div>
       </div>
       <div class="cartelera-preview">
-        <div class="preview-flyer f1">🗓️</div>
-        <div class="preview-flyer f2">🤖</div>
-        <div class="preview-flyer f3">✅</div>
+        <div class="preview-tarjeta f1">🗓️</div>
+        <div class="preview-tarjeta f2">🤖</div>
+        <div class="preview-tarjeta f3">✅</div>
       </div>
     </div>
   </div>
@@ -1076,7 +1082,7 @@
     </p>
     <div style="display:flex; gap:1rem; justify-content:center; flex-wrap:wrap;">
       <a class="btn-primary" href="tablero.html" style="display:inline-flex; background: var(--purple-dark); box-shadow: 0 4px 15px rgba(0,0,0,0.15);">
-        🖼️ Ver Tablero de Flyers
+        🖼️ Ver Tablero de Tarjetas
       </a>
       <a class="btn-primary" href="#" onclick="irAlBot('Hola! Quiero pedir un turno para ANSES'); return false;"
          style="display:inline-flex;">
