@@ -10,17 +10,17 @@ El sitio utiliza una paleta centrada en un **violeta vibrante** (Violeta Roxo) c
 
 | Nombre Variable | Color Base | Uso Primario |
 | :--- | :--- | :--- |
-| `--purple` | `#7c3aed` | Identidad, marcas principales, hover activo. |
-| `--purple-dark` | `#5b21b6` | Fondos oscuros de CTA, textos sobre fondos claros muy suaves. |
-| `--purple-light` | `#ede9fe` | Fondos de badges, secciones destacadas muy claras. |
-| `--purple-mid` | `#8b5cf6` | Botón primario de carteleras. |
-| `--green-wa` | `#25d366` | Acciones directas de WhatsApp y botones "Pedir Turno". |
-| `--green-wa-dk` | `#128c4a` | Hover del botón de WhatsApp. |
+| `--purple` | `#7c35ef` | Identidad (Violeta Roxo), marcas principales, hover activo. |
+| `--purple-dark` | `#430a9c` | Fondos oscuros de CTA, textos sobre fondos claros muy suaves. |
+| `--purple-light` | `#f5f0ff` | Fondos de badges, secciones destacadas muy claras. |
+| `--purple-mid` | `#9456ff` | Botón primario de carteleras. |
+| `--green-wa` | `#169853` | Acciones directas de WhatsApp (Verde Armonizado) y botones "Pedir Turno". |
+| `--green-wa-dk` | `#0e753e` | Hover del botón de WhatsApp. |
 | `--blue-ar` | `#0055A4` | Enlaces o marcas institucionales de alcance nacional (Argentina). |
-| `--text` | `#1f2937` | Texto base (gris oscuro, evita negro puro para mejor lectura). |
-| `--muted` | `#6b7280` | Subtítulos y textos de soporte/descripción de tarjetas. |
-| `--border` | `#e5e7eb` | Líneas de división de cards, navbar y footer. |
-| `--bg-alt` | `#f9fafb` | Color de fondo de secciones alternadas (gris ultra claro). |
+| `--text` | `#0f1219` | Texto base (gris oscuro azulado/slate, evita negro puro). |
+| `--muted` | `#6b778c` | Subtítulos y textos de soporte/descripción de tarjetas. |
+| `--border` | `#ebedf2` | Líneas de división de cards, navbar y footer. |
+| `--bg-alt` | `#f3f5f9` | Color de fondo de secciones alternadas (gris alternativo). |
 
 > [!IMPORTANT]
 > **Accesibilidad WCAG:** Al agregar textos encima de fondos de color, siempre asegúrate de usar combinaciones que superen la relación de contraste **4.5:1** (WCAG 2.1 AA). 
