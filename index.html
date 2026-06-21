@@ -241,6 +241,59 @@
     }
     .hero-note span { display: flex; align-items: center; gap: .3rem; }
 
+    /* ── Hero Layout ────────────────────────────────────────── */
+    .hero-layout {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 2rem;
+      align-items: center;
+    }
+    .hero-text-side {
+      text-align: center;
+    }
+    .hero-image-side {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+    .hero-shield-img {
+      height: 180px;
+      width: auto;
+      border-radius: 16px;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.25);
+      border: 3.5px solid rgba(255, 255, 255, 0.5);
+      transition: transform 0.4s ease, box-shadow 0.4s ease;
+    }
+    .hero-shield-img:hover {
+      transform: scale(1.06) rotate(2deg);
+      box-shadow: 0 15px 40px rgba(0, 0, 0, 0.35);
+    }
+    @media (min-width: 769px) {
+      .hero-layout {
+        grid-template-columns: 1.2fr 0.8fr;
+        text-align: left;
+        gap: 3.5rem;
+      }
+      .hero-text-side {
+        text-align: left;
+      }
+      .hero-image-side {
+        justify-content: flex-end;
+      }
+      .hero-shield-img {
+        height: 280px;
+      }
+      .hero-desc {
+        margin: 0 0 2.25rem 0;
+      }
+      .hero-cta {
+        justify-content: flex-start;
+      }
+      .hero-note {
+        justify-content: flex-start;
+      }
+    }
+
     /* ── Stats bar ─────────────────────────────────────────── */
     .stats-bar {
       background: #fff;
@@ -646,28 +699,32 @@
 <!-- ── Hero ─────────────────────────────────────────────────── -->
 <section class="hero">
   <a href="tablero.html" class="hero-overlay-link" aria-label="Ver Tablero de Tarjetas"></a>
-  <div class="container">
-    <div style="margin-bottom: 1.25rem; display: flex; justify-content: center; position: relative; z-index: 2;">
-      <img src="assets/escudo_jardin_america.jpg" alt="Escudo de Jardín América" style="height: 90px; width: auto; border-radius: 10px; box-shadow: 0 6px 20px rgba(0,0,0,0.15); border: 2.5px solid rgba(255,255,255,0.45); transition: transform 0.3s;" onmouseover="this.style.transform='scale(1.05)'" onmouseout="this.style.transform='scale(1)'">
+  <div class="container hero-layout">
+    <div class="hero-text-side">
+      <span class="hero-badge">📍 Jardín América, Misiones — Portal Comunitario</span>
+      <h1>Cartelera de la Comunidad<br><span>profesionales, comercios y servicios</span></h1>
+      <p class="hero-desc">
+        Explorá nuestra cartelera digital de tarjetas interactivas. Encontrá servicios y comercios locales en Jardín América y contactalos al instante por WhatsApp, directo y sin vueltas.
+      </p>
+      <div class="hero-cta">
+        <a class="btn-primary" href="tablero.html" style="background: var(--purple-mid); box-shadow: 0 4px 15px rgba(124, 58, 237, 0.35);">
+          🖼️ Ver Tablero de Tarjetas
+        </a>
+        <a class="btn-primary" href="#" onclick="irAlAdmin('Hola! Quiero publicar mi tarjeta'); return false;" style="background: var(--green-wa); box-shadow: 0 4px 15px rgba(37, 211, 102, 0.35);">
+          📲 Sumar mi Tarjeta Gratis
+        </a>
+      </div>
+      <p class="hero-note">
+        <span>✔ 100% Gratis para el comercio</span>
+        <span>✔ Contacto directo al celular</span>
+        <span>✔ Buscador por rubros y palabras clave</span>
+      </p>
     </div>
-    <span class="hero-badge">📍 Jardín América, Misiones — Portal Comunitario</span>
-    <h1>Cartelera de la Comunidad<br><span>profesionales, comercios y servicios</span></h1>
-    <p class="hero-desc">
-      Explorá nuestra cartelera digital de tarjetas interactivas. Encontrá servicios y comercios locales en Jardín América y contactalos al instante por WhatsApp, directo y sin vueltas.
-    </p>
-    <div class="hero-cta">
-      <a class="btn-primary" href="tablero.html" style="background: var(--purple-mid); box-shadow: 0 4px 15px rgba(124, 58, 237, 0.35);">
-        🖼️ Ver Tablero de Tarjetas
-      </a>
-      <a class="btn-primary" href="#" onclick="irAlAdmin('Hola! Quiero publicar mi tarjeta'); return false;" style="background: var(--green-wa); box-shadow: 0 4px 15px rgba(37, 211, 102, 0.35);">
-        📲 Sumar mi Tarjeta Gratis
+    <div class="hero-image-side">
+      <a href="tablero.html" style="position: relative; z-index: 2; display: block;" aria-label="Ver Tablero de Tarjetas">
+        <img src="assets/escudo_jardin_america.jpg" alt="Escudo de Jardín América" class="hero-shield-img">
       </a>
     </div>
-    <p class="hero-note">
-      <span>✔ 100% Gratis para el comercio</span>
-      <span>✔ Contacto directo al celular</span>
-      <span>✔ Buscador por rubros y palabras clave</span>
-    </p>
   </div>
 </section>
 
