@@ -94,7 +94,7 @@ Para mantener el tablero en orden, cada tarjeta agregada debe seguir el siguient
 </div>
 ```
 
-- **Categorías (`data-category`):** Debe ser estrictamente `profesionales`, `emprendimientos` o `empresas`.
+- **Categorías (`data-category`):** Debe ser estrictamente `profesionales`, `emprendimientos`, `empresas` o `cvs`.
 - **Palabras Clave (`data-keywords`):** Cadena en minúsculas, sin comas ni tildes, que contenga sinónimos útiles para el buscador (ej: `odontologo dentista muelas ortodoncia salud`).
 
 ---

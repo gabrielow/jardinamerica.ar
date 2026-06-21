@@ -26,10 +26,11 @@ Para cada imagen nueva identificada, visualízala utilizando tus capacidades de 
 ### Paso 3: Definición de Parámetros del Componente HTML
 Basándote en la información extraída, define los siguientes campos:
 1. **Nombre del archivo destino:** Renombra la imagen a un formato limpio en minúsculas y snake_case (ej. `nombre_servicio.jpeg`).
-2. **Categoría (`data-category`):** Clasifica la tarjeta en una de las siguientes tres categorías del sitio:
+2. **Categoría (`data-category`):** Clasifica la tarjeta en una de las siguientes cuatro categorías del sitio:
    * `profesionales` (para profesionales matriculados, médicos, masoterapeutas, técnicos, electricistas, etc.).
    * `emprendimientos` (para pastelerías, lavanderías, pequeños comercios o emprendedores independientes).
    * `empresas` (para negocios más consolidados, carpinterías metálicas grandes, fábricas locales, etc.).
+   * `cvs` (para currículums personales, postulantes a empleo, estudiantes, técnicos buscando trabajo, etc.).
 3. **Palabras Clave (`data-keywords`):** Crea una lista larga de palabras clave en minúsculas, separadas por espacios y sin tildes. Incluye sinónimos, servicios específicos, rubro, nombre comercial, etc., para optimizar el buscador de la página.
 4. **Mensaje de WhatsApp personalizado:** Define un mensaje corto e interactivo.
    * *Ejemplo:* `"Hola! Vi tu tarjeta de [Nombre] en ITe y quería consultarte por [Servicio/Turno]."`
@@ -61,7 +62,7 @@ Basándote en la información extraída, define los siguientes campos:
       </div>
 ```
 
-*Nota para `[TEXTO_CATEGORÍA]`:* Usa `"Profesionales / Servicios"`, `"Emprendimientos"` o `"Empresas"` según corresponda a la categoría técnica.
+*Nota para `[TEXTO_CATEGORÍA]`:* Usa `"Profesionales / Servicios"`, `"Emprendimientos"`, `"Empresas"` o `"CV / Postulante"` según corresponda a la categoría técnica.
 
 ### Paso 5: Confirmación, Commit y Subida (Git)
 Una vez modificado el archivo HTML y copiada la imagen a la carpeta `assets`:

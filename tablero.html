@@ -449,9 +449,9 @@
         <img src="assets/escudo_jardin_america.jpg" alt="Escudo de Jardín América" style="height: 70px; width: auto; border-radius: 8px; box-shadow: 0 4px 12px rgba(0,0,0,0.1); border: 2px solid #fff;">
       </div>
       <span class="badge badge-purple">📍 JARDÍN AMÉRICA, MISIONES</span>
-      <h1>Cartelera de Emprendimientos y Profesionales</h1>
+      <h1>Cartelera de Emprendimientos, Profesionales y CVs</h1>
       <p class="subtitle">
-        Encontrá servicios locales, ampliá las tarjetas para ver detalles y contactalas directamente por WhatsApp al instante.
+        Encontrá servicios locales, profesionales autónomos y CVs de postulantes. Ampliá las tarjetas para ver más detalles y contactalos por WhatsApp.
       </p>
     </div>
   </header>
@@ -463,7 +463,7 @@
     <div class="search-filter-box">
       <div class="search-row">
         <span class="search-icon">🔍</span>
-        <input type="text" class="search-input" id="search-input" placeholder="Buscar por rubro, servicio o nombre (ej: odontólogo, tortas, pastelería)...">
+        <input type="text" class="search-input" id="search-input" placeholder="Buscar por rubro, servicio, nombre o perfil de CV (ej: administrativo, enfermero, Laura)...">
       </div>
       <div class="filters-row">
         <span class="filter-label">Filtrar por:</span>
@@ -471,6 +471,7 @@
         <button class="btn-filter" data-category="profesionales">Profesionales</button>
         <button class="btn-filter" data-category="emprendimientos">Emprendimientos</button>
         <button class="btn-filter" data-category="empresas">Empresas</button>
+        <button class="btn-filter" data-category="cvs">CVs Personales</button>
       </div>
     </div>
 
@@ -585,6 +586,42 @@
             Venta de frutas y verduras seleccionadas de excelente calidad en Jardín América. Productos frescos todos los días.
           </p>
           <a class="btn-wa-contact" href="#" onclick="irAContactar('5493743481909', 'Hola! Vi tu tarjeta de Frutería Verdulería Gabys en ITe y quería hacerte una consulta.'); return false;">
+            📲 Enviar WhatsApp
+          </a>
+        </div>
+      </div>
+
+      <!-- Tarjeta 7: Laura Giménez (CV / Postulante) -->
+      <div class="tarjeta-card" data-category="cvs" data-keywords="laura gimenez cv curriculum vitae administracion secretaria secretaria facturacion excel atencion cliente administracion">
+        <div class="tarjeta-img-container" onclick="openLightbox('assets/cv_laura_gimenez.png')">
+          <img class="tarjeta-img" src="assets/cv_laura_gimenez.png" alt="CV Laura Giménez" loading="lazy">
+          <div class="tarjeta-zoom-overlay">🔍 Ampliar</div>
+        </div>
+        <div class="tarjeta-info">
+          <span class="tarjeta-cat-badge">CV / Postulante</span>
+          <h3 class="tarjeta-title">Laura Giménez</h3>
+          <p class="tarjeta-desc">
+            Estudiante de Lic. en Administración, con experiencia en atención al cliente, facturación y manejo de planillas Excel. Excelente trato y disponibilidad horaria.
+          </p>
+          <a class="btn-wa-contact" href="#" onclick="irAContactar('5493743454291', 'Hola Laura! Vi tu CV en ITe y quería consultarte por una búsqueda de empleo.'); return false;">
+            📲 Enviar WhatsApp
+          </a>
+        </div>
+      </div>
+
+      <!-- Tarjeta 8: Mateo Kaczarek (CV / Postulante) -->
+      <div class="tarjeta-card" data-category="cvs" data-keywords="mateo kaczarek cv curriculum vitae enfermero enfermeria acompañante terapeutico salud cuidados domiciliarios inyectables primeros auxilios">
+        <div class="tarjeta-img-container" onclick="openLightbox('assets/cv_mateo_kaczarek.png')">
+          <img class="tarjeta-img" src="assets/cv_mateo_kaczarek.png" alt="CV Mateo Kaczarek" loading="lazy">
+          <div class="tarjeta-zoom-overlay">🔍 Ampliar</div>
+        </div>
+        <div class="tarjeta-info">
+          <span class="tarjeta-cat-badge">CV / Postulante</span>
+          <h3 class="tarjeta-title">Mateo Kaczarek</h3>
+          <p class="tarjeta-desc">
+            Enfermero egresado de la UNaM, con experiencia en cuidados domiciliarios, aplicación de inyectables, toma de presión y primeros auxilios. Referencias comprobables.
+          </p>
+          <a class="btn-wa-contact" href="#" onclick="irAContactar('5493743454291', 'Hola Mateo! Vi tu CV en ITe y quería consultarte por una búsqueda de empleo.'); return false;">
             📲 Enviar WhatsApp
           </a>
         </div>
