@@ -624,11 +624,13 @@
       <a href="#como-funciona">Cómo funciona</a>
       <a href="#para-organizaciones">Para organizaciones</a>
       <a href="#faq">FAQ</a>
-      <a href="tablero.html" class="nav-cartelera-badge">✨ Cartelera Local</a>
     </div>
-    <a class="btn-wa-nav" href="#" onclick="irAlBot('Hola! Quiero pedir un turno'); return false;">
-      📲 Pedir turno
-    </a>
+    <div style="display: flex; align-items: center; gap: 0.5rem;">
+      <a href="tablero.html" class="nav-cartelera-badge">✨ Cartelera</a>
+      <a class="btn-wa-nav" href="#" onclick="irAlBot('Hola! Quiero pedir un turno'); return false;">
+        📲 Pedir turno
+      </a>
+    </div>
   </div>
 </nav>
 
@@ -1062,10 +1064,13 @@
   <div class="container">
     <h2>¿Listo para empezar?</h2>
     <p>
-      Si sos ciudadano, sacá tu turno ahora mismo.<br>
+      Si sos ciudadano, buscá servicios o sacá tu turno ahora mismo.<br>
       Si representás una organización, hablemos.
     </p>
     <div style="display:flex; gap:1rem; justify-content:center; flex-wrap:wrap;">
+      <a class="btn-primary" href="tablero.html" style="display:inline-flex; background: var(--purple-dark); box-shadow: 0 4px 15px rgba(0,0,0,0.15);">
+        🖼️ Ver Tablero de Flyers
+      </a>
       <a class="btn-primary" href="#" onclick="irAlBot('Hola! Quiero pedir un turno para ANSES'); return false;"
          style="display:inline-flex;">
         💬 Pedir turno — Operativo ANSES
@@ -1086,6 +1091,7 @@
       Plataforma de turnos por WhatsApp · Jardín América, Misiones, Argentina
     </div>
     <div class="footer-links">
+      <a href="tablero.html" style="font-weight: 700; color: #fff;">✨ Cartelera Local</a>
       <a href="#casos-de-uso">Casos de uso</a>
       <a href="#para-organizaciones">Organizaciones</a>
       <a href="https://admin.ite.com.ar" style="font-size:.8rem;">Panel admin</a>
