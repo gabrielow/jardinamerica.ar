@@ -175,7 +175,7 @@
       margin: 0 auto 2.25rem;
       line-height: 1.65;
     }
-    .hero-cta { display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap; position: relative; z-index: 2; }
+    .hero-cta { display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap; align-items: center; position: relative; z-index: 2; }
     .hero-overlay-link {
       position: absolute;
       inset: 0;
@@ -747,14 +747,12 @@
         Explorá nuestra cartelera digital de tarjetas interactivas. Encontrá servicios y comercios locales en Jardín América y contactalos al instante por WhatsApp, directo y sin vueltas.
       </p>
       <div class="hero-cta">
-        <div style="position: relative; display: inline-block;">
-          <div class="cta-suggestion">
+        <a class="btn-primary" href="tablero.html" style="position: relative; background: var(--purple-mid); box-shadow: 0 4px 15px rgba(124, 58, 237, 0.35);">
+          <span class="cta-suggestion">
             Encontrá la solución acá <span class="cta-arrow">↓</span>
-          </div>
-          <a class="btn-primary" href="tablero.html" style="background: var(--purple-mid); box-shadow: 0 4px 15px rgba(124, 58, 237, 0.35);">
-            🖼️ Ver Tablero de Tarjetas
-          </a>
-        </div>
+          </span>
+          🖼️ Ver Tablero de Tarjetas
+        </a>
         <a class="btn-primary" href="#" onclick="irAlAdmin('Hola! Quiero publicar mi tarjeta'); return false;" style="background: var(--green-wa); box-shadow: 0 4px 15px rgba(37, 211, 102, 0.35);">
           📲 Sumar mi Tarjeta Gratis
         </a>
@@ -1182,8 +1180,11 @@
       Si sos ciudadano, buscá servicios o sacá tu turno ahora mismo.<br>
       Si representás una organización, hablemos.
     </p>
-    <div style="display:flex; gap:1rem; justify-content:center; flex-wrap:wrap;">
-      <a class="btn-primary" href="tablero.html" style="display:inline-flex; background: var(--purple-dark); box-shadow: 0 4px 15px rgba(0,0,0,0.15);">
+    <div style="display:flex; gap:1rem; justify-content:center; flex-wrap:wrap; align-items:center;">
+      <a class="btn-primary" href="tablero.html" style="position: relative; background: var(--purple-dark); box-shadow: 0 4px 15px rgba(0,0,0,0.15);">
+        <span class="cta-suggestion">
+          Encontrá la solución acá <span class="cta-arrow">↓</span>
+        </span>
         🖼️ Ver Tablero de Tarjetas
       </a>
       <a class="btn-primary" href="#" onclick="irAlBot('Hola! Quiero pedir un turno para ANSES'); return false;"
