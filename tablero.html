@@ -1,51 +1,71 @@
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Tablero de Tarjetas — ITe Jardín América</title>
-  <meta name="description" content="Cartelera digital de profesionales, emprendimientos y empresas de Jardín América, Misiones.">
-  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>💜</text></svg>">
+  <meta name="description"
+    content="Cartelera digital de profesionales, emprendimientos y empresas de Jardín América, Misiones.">
+  <link rel="icon"
+    href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>💜</text></svg>">
   <style>
     /* ── Variables (coincidentes con index.html) ─────────────── */
     :root {
-      --purple:       #7c35ef;
-      --purple-dark:  #430a9c;
+      --purple: #7c35ef;
+      --purple-dark: #430a9c;
       --purple-light: #f5f0ff;
-      --purple-mid:   #9456ff;
-      --blue-ar:      #0055A4;
-      --green-wa:     #169853;
-      --green-wa-dk:  #0e753e;
-      --text:         #0f1219;
-      --muted:        #6b778c;
-      --border:       #ebedf2;
-      --bg-alt:       #f3f5f9;
-      --radius:       12px;
-      --shadow:       0 2px 16px rgba(0,0,0,.08);
-      --shadow-md:    0 4px 24px rgba(0,0,0,.12);
+      --purple-mid: #9456ff;
+      --blue-ar: #0055A4;
+      --green-wa: #169853;
+      --green-wa-dk: #0e753e;
+      --text: #0f1219;
+      --muted: #6b778c;
+      --border: #ebedf2;
+      --bg-alt: #f3f5f9;
+      --radius: 12px;
+      --shadow: 0 2px 16px rgba(0, 0, 0, .08);
+      --shadow-md: 0 4px 24px rgba(0, 0, 0, .12);
     }
 
     /* ── Reset ─────────────────────────────────────────────── */
-    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    *,
+    *::before,
+    *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
     body {
       font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
       color: var(--text);
       line-height: 1.6;
       background: #fdfdfd;
     }
-    img { max-width: 100%; height: auto; display: block; }
-    a { color: inherit; text-decoration: none; }
+
+    img {
+      max-width: 100%;
+      height: auto;
+      display: block;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
 
     /* ── Navbar ────────────────────────────────────────────── */
     .navbar {
       position: sticky;
       top: 0;
       z-index: 100;
-      background: rgba(255,255,255,.93);
+      background: rgba(255, 255, 255, .93);
       backdrop-filter: blur(10px);
       border-bottom: 1px solid var(--border);
       padding: .85rem 0;
     }
+
     .navbar .container {
       display: flex;
       align-items: center;
@@ -55,6 +75,7 @@
       padding: 0 1.25rem;
       gap: 1rem;
     }
+
     .navbar-brand {
       font-weight: 800;
       font-size: 1.15rem;
@@ -63,6 +84,7 @@
       align-items: center;
       gap: .4rem;
     }
+
     .btn-back {
       color: var(--muted);
       font-size: .88rem;
@@ -72,19 +94,24 @@
       align-items: center;
       gap: .3rem;
     }
-    .btn-back:hover { color: var(--purple); }
+
+    .btn-back:hover {
+      color: var(--purple);
+    }
 
     /* ── Header Sección ────────────────────────────────────── */
     .header-section {
       text-align: center;
       padding: 3rem 0 2rem 0;
-      background: linear-gradient(180deg, var(--purple-light) 0%, rgba(253,253,253,1) 100%);
+      background: linear-gradient(180deg, var(--purple-light) 0%, rgba(253, 253, 253, 1) 100%);
     }
+
     .container {
       max-width: 1060px;
       margin: 0 auto;
       padding: 0 1.25rem;
     }
+
     .badge {
       display: inline-block;
       padding: .3rem .8rem;
@@ -94,8 +121,13 @@
       letter-spacing: .04em;
       margin-bottom: 0.75rem;
     }
-    .badge-purple { background: var(--purple-light); color: var(--purple-dark); border: 1px solid #ddd6fe; }
-    
+
+    .badge-purple {
+      background: var(--purple-light);
+      color: var(--purple-dark);
+      border: 1px solid #ddd6fe;
+    }
+
     h1 {
       font-size: clamp(1.8rem, 4vw, 2.5rem);
       font-weight: 800;
@@ -103,6 +135,7 @@
       margin-bottom: .6rem;
       letter-spacing: -0.02em;
     }
+
     .subtitle {
       color: var(--muted);
       font-size: 1rem;
@@ -119,10 +152,12 @@
       box-shadow: var(--shadow);
       margin-bottom: 2.5rem;
     }
+
     .search-row {
       position: relative;
       margin-bottom: 1rem;
     }
+
     .search-input {
       width: 100%;
       padding: .85rem 1rem .85rem 2.5rem;
@@ -132,10 +167,12 @@
       outline: none;
       transition: border-color .2s, box-shadow .2s;
     }
+
     .search-input:focus {
       border-color: var(--purple);
       box-shadow: 0 0 0 3px rgba(124, 53, 239, 0.15);
     }
+
     .search-icon {
       position: absolute;
       left: 1rem;
@@ -145,12 +182,14 @@
       pointer-events: none;
       font-size: 1.1rem;
     }
+
     .filters-row {
       display: flex;
       flex-wrap: wrap;
       gap: .5rem;
       align-items: center;
     }
+
     .filter-label {
       font-size: .82rem;
       color: var(--muted);
@@ -159,6 +198,7 @@
       letter-spacing: .05em;
       margin-right: .5rem;
     }
+
     .btn-filter {
       background: #f3f4f6;
       border: 1px solid transparent;
@@ -170,9 +210,11 @@
       cursor: pointer;
       transition: background .2s, border-color .2s, color .2s;
     }
+
     .btn-filter:hover {
       background: #e5e7eb;
     }
+
     .btn-filter.active {
       background: var(--purple);
       color: #fff;
@@ -185,6 +227,7 @@
       gap: 1.75rem;
       margin-bottom: 4rem;
     }
+
     .tarjeta-card {
       background: #fff;
       border: 1px solid var(--border);
@@ -195,30 +238,35 @@
       display: flex;
       flex-direction: column;
     }
+
     .tarjeta-card:hover {
       transform: translateY(-4px);
       box-shadow: var(--shadow-md);
       border-color: var(--purple-mid);
     }
+
     .tarjeta-img-container {
       position: relative;
       background: #f3f4f6;
       overflow: hidden;
       cursor: zoom-in;
     }
+
     .tarjeta-img {
       width: 100%;
       height: auto;
       display: block;
       transition: transform .3s;
     }
+
     .tarjeta-card:hover .tarjeta-img {
       transform: scale(1.03);
     }
+
     .tarjeta-zoom-overlay {
       position: absolute;
       inset: 0;
-      background: rgba(0,0,0,0.15);
+      background: rgba(0, 0, 0, 0.15);
       opacity: 0;
       display: flex;
       align-items: center;
@@ -227,15 +275,18 @@
       color: #fff;
       font-size: 1.5rem;
     }
+
     .tarjeta-img-container:hover .tarjeta-zoom-overlay {
       opacity: 1;
     }
+
     .tarjeta-info {
       padding: 1.25rem;
       display: flex;
       flex-direction: column;
       flex: 1;
     }
+
     .tarjeta-cat-badge {
       font-size: .7rem;
       font-weight: 700;
@@ -248,12 +299,14 @@
       letter-spacing: .02em;
       margin-bottom: .5rem;
     }
+
     .tarjeta-title {
       font-size: 1.1rem;
       font-weight: 700;
       color: #111827;
       margin-bottom: .4rem;
     }
+
     .tarjeta-desc {
       font-size: .85rem;
       color: var(--muted);
@@ -261,6 +314,7 @@
       flex: 1;
       line-height: 1.5;
     }
+
     .btn-wa-contact {
       background: var(--green-wa);
       color: #fff;
@@ -276,9 +330,11 @@
       transition: background .2s, transform .1s;
       width: 100%;
     }
+
     .btn-wa-contact:hover {
       background: var(--green-wa-dk);
     }
+
     .btn-wa-contact:active {
       transform: scale(0.98);
     }
@@ -294,7 +350,11 @@
       color: var(--muted);
       display: none;
     }
-    .no-results-icon { font-size: 2.5rem; margin-bottom: 0.5rem; }
+
+    .no-results-icon {
+      font-size: 2.5rem;
+      margin-bottom: 0.5rem;
+    }
 
     /* ── Banner Sumar Tarjeta ────────────────────────────────── */
     .sumar-tarjeta-box {
@@ -308,6 +368,7 @@
       position: relative;
       overflow: hidden;
     }
+
     .sumar-tarjeta-box::before {
       content: '';
       position: absolute;
@@ -315,17 +376,20 @@
       opacity: 0.05;
       background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='1'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
     }
+
     .sumar-tarjeta-box h2 {
       font-size: clamp(1.4rem, 3.5vw, 1.8rem);
       font-weight: 800;
       margin-bottom: .75rem;
     }
+
     .sumar-tarjeta-box p {
       font-size: .95rem;
       max-width: 580px;
       margin: 0 auto 1.5rem;
       opacity: .9;
     }
+
     .btn-sumar {
       display: inline-flex;
       align-items: center;
@@ -339,6 +403,7 @@
       box-shadow: 0 4px 15px rgba(22, 152, 83, 0.3);
       transition: background .2s, transform .15s;
     }
+
     .btn-sumar:hover {
       background: var(--green-wa-dk);
       transform: translateY(-2px);
@@ -358,10 +423,12 @@
       transition: opacity 0.25s ease;
       padding: 1.5rem;
     }
+
     .lightbox.active {
       opacity: 1;
       pointer-events: all;
     }
+
     .lightbox-content {
       position: relative;
       max-width: 90%;
@@ -370,19 +437,22 @@
       flex-direction: column;
       align-items: center;
     }
+
     .lightbox-img {
       max-width: 100%;
       max-height: 80vh;
       object-fit: contain;
       border-radius: 8px;
-      box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
       border: 3px solid #fff;
       transform: scale(0.95);
       transition: transform 0.25s ease;
     }
+
     .lightbox.active .lightbox-img {
       transform: scale(1);
     }
+
     .lightbox-close {
       position: absolute;
       top: -2.5rem;
@@ -395,7 +465,10 @@
       line-height: 1;
       transition: color .2s;
     }
-    .lightbox-close:hover { color: var(--purple-light); }
+
+    .lightbox-close:hover {
+      color: var(--purple-light);
+    }
 
     /* ── Footer ─────────────────────────────────────────────── */
     footer {
@@ -404,24 +477,58 @@
       padding: 2.25rem 0;
       font-size: .85rem;
     }
+
     footer .container {
-      display: flex; flex-wrap: wrap;
-      justify-content: space-between; align-items: center; gap: 1rem;
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      align-items: center;
+      gap: 1rem;
     }
-    footer a { color: #64748b; }
-    footer a:hover { color: #fff; }
-    .footer-brand { color: #fff; font-weight: 700; font-size: .95rem; }
-    .footer-links { display: flex; gap: 1.25rem; flex-wrap: wrap; }
+
+    footer a {
+      color: #64748b;
+    }
+
+    footer a:hover {
+      color: #fff;
+    }
+
+    .footer-brand {
+      color: #fff;
+      font-weight: 700;
+      font-size: .95rem;
+    }
+
+    .footer-links {
+      display: flex;
+      gap: 1.25rem;
+      flex-wrap: wrap;
+    }
 
     /* ── Responsive ─────────────────────────────────────────── */
     @media (max-width: 600px) {
-      .header-section { padding: 2.25rem 0 1.5rem 0; }
-      .search-filter-box { padding: 1rem; margin-bottom: 1.75rem; }
-      .tablero-grid { gap: 1.25rem; margin-bottom: 2.5rem; }
-      .sumar-tarjeta-box { padding: 2rem 1.25rem; }
+      .header-section {
+        padding: 2.25rem 0 1.5rem 0;
+      }
+
+      .search-filter-box {
+        padding: 1rem;
+        margin-bottom: 1.75rem;
+      }
+
+      .tablero-grid {
+        gap: 1.25rem;
+        margin-bottom: 2.5rem;
+      }
+
+      .sumar-tarjeta-box {
+        padding: 2rem 1.25rem;
+      }
     }
   </style>
 </head>
+
 <body>
 
   <!-- Números de WhatsApp -->
@@ -433,7 +540,8 @@
   <nav class="navbar">
     <div class="container">
       <a class="navbar-brand" href="index.html" style="display: flex; align-items: center; gap: 0.5rem;">
-        <img src="assets/escudo_jardin_america.jpg" alt="Escudo" style="height: 28px; width: 28px; object-fit: contain; border-radius: 4px;">
+        <img src="assets/escudo_jardin_america.jpg" alt="Escudo"
+          style="height: 28px; width: 28px; object-fit: contain; border-radius: 4px;">
         ITe
       </a>
       <a class="btn-back" href="index.html">
@@ -446,12 +554,14 @@
   <header class="header-section">
     <div class="container">
       <div style="margin-bottom: 1rem; display: flex; justify-content: center;">
-        <img src="assets/escudo_jardin_america.jpg" alt="Escudo de Jardín América" style="height: 70px; width: auto; border-radius: 8px; box-shadow: 0 4px 12px rgba(0,0,0,0.1); border: 2px solid #fff;">
+        <img src="assets/escudo_jardin_america.jpg" alt="Escudo de Jardín América"
+          style="height: 70px; width: auto; border-radius: 8px; box-shadow: 0 4px 12px rgba(0,0,0,0.1); border: 2px solid #fff;">
       </div>
       <span class="badge badge-purple">📍 JARDÍN AMÉRICA, MISIONES</span>
       <h1>Cartelera de Emprendimientos, Profesionales y CVs</h1>
       <p class="subtitle">
-        Encontrá servicios locales, profesionales autónomos y CVs de postulantes. Ampliá las tarjetas para ver más detalles y contactalos por WhatsApp.
+        Encontrá servicios locales, profesionales autónomos y CVs de postulantes. Ampliá las tarjetas para ver más
+        detalles y contactalos por WhatsApp.
       </p>
     </div>
   </header>
@@ -463,7 +573,8 @@
     <div class="search-filter-box">
       <div class="search-row">
         <span class="search-icon">🔍</span>
-        <input type="text" class="search-input" id="search-input" placeholder="Buscar por rubro, servicio, nombre o perfil de CV (ej: administrativo, enfermero, Laura)...">
+        <input type="text" class="search-input" id="search-input"
+          placeholder="Buscar por rubro, servicio, nombre o perfil de CV (ej: administrativo, enfermero, Laura)...">
       </div>
       <div class="filters-row">
         <span class="filter-label">Filtrar por:</span>
@@ -479,7 +590,8 @@
     <div class="tablero-grid" id="tablero-grid">
 
       <!-- Tarjeta 1: RELTEC Soluciones (Profesional/Empresa) -->
-      <div class="tarjeta-card" data-category="profesionales" data-keywords="refrigeracion aire acondicionado split electricista electricidad instalacion tecnologia domotica automatizacion alarmas camaras reltec">
+      <div class="tarjeta-card" data-category="profesionales"
+        data-keywords="refrigeracion aire acondicionado split electricista electricidad instalacion tecnologia domotica automatizacion alarmas camaras reltec">
         <div class="tarjeta-img-container" onclick="openLightbox('assets/reltec_soluciones.jpeg')">
           <img class="tarjeta-img" src="assets/reltec_soluciones.jpeg" alt="RELTEC Soluciones" loading="lazy">
           <div class="tarjeta-zoom-overlay">🔍 Ampliar</div>
@@ -488,13 +600,18 @@
           <span class="tarjeta-cat-badge">Profesionales / Servicios</span>
           <h3 class="tarjeta-title">RELTEC Soluciones</h3>
           <p class="tarjeta-desc">
-            Instalación, mantenimiento y reparación de aire acondicionado (Split), instalaciones eléctricas domiciliarias e industriales, y domótica/automatización.
+            Instalación, mantenimiento y reparación de aire acondicionado (Split), instalaciones eléctricas
+            domiciliarias e industriales, y domótica/automatización.
           </p>
           <div style="display:flex; gap:.5rem;">
-            <a class="btn-wa-contact" href="#" onclick="irAContactar('5493743441580', 'Hola Kevin! Vi tu tarjeta de RELTEC en ITe y quería consultarte por un servicio.'); return false;" style="flex:1;">
+            <a class="btn-wa-contact" href="#"
+              onclick="irAContactar('5493743441580', 'Hola Kevin! Vi tu tarjeta de RELTEC en ITe y quería consultarte por un servicio.'); return false;"
+              style="flex:1;">
               📲 Kevin
             </a>
-            <a class="btn-wa-contact" href="#" onclick="irAContactar('5493757508282', 'Hola Angelo! Vi tu tarjeta de RELTEC en ITe y quería consultarte por un servicio.'); return false;" style="flex:1; background:#0055A4;">
+            <a class="btn-wa-contact" href="#"
+              onclick="irAContactar('5493757508282', 'Hola Angelo! Vi tu tarjeta de RELTEC en ITe y quería consultarte por un servicio.'); return false;"
+              style="flex:1; background:#0055A4;">
               📲 Angelo
             </a>
           </div>
@@ -502,7 +619,8 @@
       </div>
 
       <!-- Tarjeta 2: Lavandería Fer Kia (Emprendimiento) -->
-      <div class="tarjeta-card" data-category="emprendimientos" data-keywords="lavanderia lavarropa ropa secar frazadas acolchados ferkia lavadero limpieza ropa">
+      <div class="tarjeta-card" data-category="emprendimientos"
+        data-keywords="lavanderia lavarropa ropa secar frazadas acolchados ferkia lavadero limpieza ropa">
         <div class="tarjeta-img-container" onclick="openLightbox('assets/lavanderia_ferkia.jpeg')">
           <img class="tarjeta-img" src="assets/lavanderia_ferkia.jpeg" alt="Lavandería Fer Kia" loading="lazy">
           <div class="tarjeta-zoom-overlay">🔍 Ampliar</div>
@@ -511,34 +629,41 @@
           <span class="tarjeta-cat-badge">Emprendimientos</span>
           <h3 class="tarjeta-title">Lavandería Fer Kia</h3>
           <p class="tarjeta-desc">
-            Servicio de lavado de frazadas, acolchados y ropa por docena. Prendas limpias, suaves y perfumadas. Dirección: Juan M. de Rosa Mz C - Casa 11.
+            Servicio de lavado de frazadas, acolchados y ropa por docena. Prendas limpias, suaves y perfumadas.
+            Dirección: Juan M. de Rosa Mz C - Casa 11.
           </p>
-          <a class="btn-wa-contact" href="#" onclick="irAContactar('5493743472667', 'Hola! Vi tu tarjeta de Lavandería Fer Kia en ITe y quería consultarte por un servicio.'); return false;">
+          <a class="btn-wa-contact" href="#"
+            onclick="irAContactar('5493743472667', 'Hola! Vi tu tarjeta de Lavandería Fer Kia en ITe y quería consultarte por un servicio.'); return false;">
             📲 Enviar WhatsApp
           </a>
         </div>
       </div>
 
       <!-- Tarjeta 3: LF-Masoterapia y Terapias Corporales (Profesional) -->
-      <div class="tarjeta-card" data-category="profesionales" data-keywords="lf masoterapia masajes terapias corporales descontracturantes relajantes puntos dolor maderoterapia ventosas piedras calientes drenaje linfatico facial pies piernas cansadas salud bienestar femenino profesional matriculada">
+      <div class="tarjeta-card" data-category="profesionales"
+        data-keywords="lf masoterapia masajes terapias corporales descontracturantes relajantes puntos dolor maderoterapia ventosas piedras calientes drenaje linfatico facial pies piernas cansadas salud bienestar femenino profesional matriculada">
         <div class="tarjeta-img-container" onclick="openLightbox('assets/lf_masoterapia.jpeg')">
-          <img class="tarjeta-img" src="assets/lf_masoterapia.jpeg" alt="LF-Masoterapia y Terapias Corporales" loading="lazy">
+          <img class="tarjeta-img" src="assets/lf_masoterapia.jpeg" alt="LF-Masoterapia y Terapias Corporales"
+            loading="lazy">
           <div class="tarjeta-zoom-overlay">🔍 Ampliar</div>
         </div>
         <div class="tarjeta-info">
           <span class="tarjeta-cat-badge">Profesionales / Servicios</span>
           <h3 class="tarjeta-title">LF-Masoterapia y Terapias Corporales</h3>
           <p class="tarjeta-desc">
-            Masajes descontracturantes, relajantes, maderoterapia, piedras calientes, ventosas, drenaje linfático y masaje facial. Especialidad en salud y bienestar femenino. Profesional matriculada (Mat. N° 155/24).
+            Masajes descontracturantes, relajantes, maderoterapia, piedras calientes, ventosas, drenaje linfático y
+            masaje facial. Especialidad en salud y bienestar femenino. Profesional matriculada (Mat. N° 155/24).
           </p>
-          <a class="btn-wa-contact" href="#" onclick="irAContactar('5493743481476', 'Hola! Vi tu tarjeta de LF-Masoterapia en ITe y quería consultarte por un turno.'); return false;">
+          <a class="btn-wa-contact" href="#"
+            onclick="irAContactar('5493743481476', 'Hola! Vi tu tarjeta de LF-Masoterapia en ITe y quería consultarte por un turno.'); return false;">
             📲 Enviar WhatsApp
           </a>
         </div>
       </div>
 
       <!-- Tarjeta 4: CR Informática (Profesional/Servicio) -->
-      <div class="tarjeta-card" data-category="profesionales" data-keywords="cr informatica computacion computadoras servicio tecnico reparacion mantenimiento soporte formateo windows pc notebook netbook jardin america misiones">
+      <div class="tarjeta-card" data-category="profesionales"
+        data-keywords="cr informatica computacion computadoras servicio tecnico reparacion mantenimiento soporte formateo windows pc notebook netbook jardin america misiones">
         <div class="tarjeta-img-container" onclick="openLightbox('assets/cr_informatica.jpeg')">
           <img class="tarjeta-img" src="assets/cr_informatica.jpeg" alt="CR Informática" loading="lazy">
           <div class="tarjeta-zoom-overlay">🔍 Ampliar</div>
@@ -547,16 +672,19 @@
           <span class="tarjeta-cat-badge">Profesionales / Servicios</span>
           <h3 class="tarjeta-title">CR Informática</h3>
           <p class="tarjeta-desc">
-            Servicio técnico especializado en computación en Jardín América. Mantenimiento, soporte y reparación de computadoras, notebooks y equipos informáticos.
+            Servicio técnico especializado en computación en Jardín América. Mantenimiento, soporte y reparación de
+            computadoras, notebooks y equipos informáticos.
           </p>
-          <a class="btn-wa-contact" href="#" onclick="irAContactar('5493743486866', 'Hola! Vi tu tarjeta de CR Informática en ITe y quería hacerte una consulta.'); return false;">
+          <a class="btn-wa-contact" href="#"
+            onclick="irAContactar('5493743486866', 'Hola! Vi tu tarjeta de CR Informática en ITe y quería hacerte una consulta.'); return false;">
             📲 Enviar WhatsApp
           </a>
         </div>
       </div>
 
       <!-- Tarjeta 5: Aberturas METALUM (Empresa) -->
-      <div class="tarjeta-card" data-category="empresas" data-keywords="aberturas metalum carpinteria aluminio ventanas puertas portones cerramientos perfiles metalica jardin america misiones atm">
+      <div class="tarjeta-card" data-category="empresas"
+        data-keywords="aberturas metalum carpinteria aluminio ventanas puertas portones cerramientos perfiles metalica jardin america misiones atm">
         <div class="tarjeta-img-container" onclick="openLightbox('assets/metalum_aberturas.jpeg')">
           <img class="tarjeta-img" src="assets/metalum_aberturas.jpeg" alt="Aberturas METALUM" loading="lazy">
           <div class="tarjeta-zoom-overlay">🔍 Ampliar</div>
@@ -565,34 +693,62 @@
           <span class="tarjeta-cat-badge">Empresas</span>
           <h3 class="tarjeta-title">Aberturas METALUM</h3>
           <p class="tarjeta-desc">
-            Carpintería en aluminio a medida en Jardín América. Fabricación y colocación de aberturas, ventanas, puertas y cerramientos de aluminio de alta calidad.
+            Carpintería en aluminio a medida en Jardín América. Fabricación y colocación de aberturas, ventanas, puertas
+            y cerramientos de aluminio de alta calidad.
           </p>
-          <a class="btn-wa-contact" href="#" onclick="irAContactar('5493743474818', 'Hola! Vi tu tarjeta de Aberturas Metalum en ITe y quería solicitar un presupuesto/consulta.'); return false;">
+          <a class="btn-wa-contact" href="#"
+            onclick="irAContactar('5493743474818', 'Hola! Vi tu tarjeta de Aberturas Metalum en ITe y quería solicitar un presupuesto/consulta.'); return false;">
             📲 Enviar WhatsApp
           </a>
         </div>
       </div>
 
       <!-- Tarjeta 6: Frutería Verdulería Gabys (Emprendimiento) -->
-      <div class="tarjeta-card" data-category="emprendimientos" data-keywords="fruteria verduleria gabys gabis frutas verduras solo calidad jardin america misiones almacen saludable verdulero frutero">
+      <div class="tarjeta-card" data-category="emprendimientos"
+        data-keywords="fruteria verduleria gabys gabis frutas verduras solo calidad jardin america misiones almacen saludable verdulero frutero">
         <div class="tarjeta-img-container" onclick="openLightbox('assets/fruteria_verduleria_gabys.jpeg')">
-          <img class="tarjeta-img" src="assets/fruteria_verduleria_gabys.jpeg" alt="Frutería Verdulería Gabys" loading="lazy">
+          <img class="tarjeta-img" src="assets/fruteria_verduleria_gabys.jpeg" alt="Frutería Verdulería Gabys"
+            loading="lazy">
           <div class="tarjeta-zoom-overlay">🔍 Ampliar</div>
         </div>
         <div class="tarjeta-info">
           <span class="tarjeta-cat-badge">Emprendimientos</span>
           <h3 class="tarjeta-title">Frutería Verdulería Gabys</h3>
           <p class="tarjeta-desc">
-            Venta de frutas y verduras seleccionadas de excelente calidad en Jardín América. Productos frescos todos los días.
+            Venta de frutas y verduras seleccionadas de excelente calidad en Jardín América. Productos frescos todos los
+            días.
           </p>
-          <a class="btn-wa-contact" href="#" onclick="irAContactar('5493743481909', 'Hola! Vi tu tarjeta de Frutería Verdulería Gabys en ITe y quería hacerte una consulta.'); return false;">
+          <a class="btn-wa-contact" href="#"
+            onclick="irAContactar('5493743481909', 'Hola! Vi tu tarjeta de Frutería Verdulería Gabys en ITe y quería hacerte una consulta.'); return false;">
             📲 Enviar WhatsApp
           </a>
         </div>
       </div>
 
-      <!-- Tarjeta 7: Laura Giménez (CV / Postulante) -->
-      <div class="tarjeta-card" data-category="cvs" data-keywords="laura gimenez cv curriculum vitae administracion secretaria secretaria facturacion excel atencion cliente administracion">
+      <!-- Tarjeta 7: Gonzales Mariana (Emprendimiento) -->
+      <div class="tarjeta-card" data-category="emprendimientos"
+        data-keywords="fruteria verduleria gabys gabis frutas verduras solo calidad jardin america misiones almacen saludable verdulero frutero">
+        <div class="tarjeta-img-container" onclick="openLightbox('assets/GonzalesMariana.jpeg')">
+          <img class="tarjeta-img" src="assets/GonzalesMariana.jpeg" alt="Enfermeria a Domicilio" loading="lazy">
+          <div class="tarjeta-zoom-overlay">🔍 Ampliar</div>
+        </div>
+        <div class="tarjeta-info">
+          <span class="tarjeta-cat-badge">Emprendimientos</span>
+          <h3 class="tarjeta-title">Enfermeria a Domicilio</h3>
+          <p class="tarjeta-desc">
+            Enfermeria a domicilio en Jardín América. Realizamos curaciones, inyectables, asistencia al paciente,
+            control de signos vitales y acompañamiento terapéutico.
+          </p>
+          <a class="btn-wa-contact" href="#"
+            onclick="irAContactar('5493743616393', 'Hola! Vi tu tarjeta de Enfermeria a Domicilio en ITe y quería hacerte una consulta.'); return false;">
+            📲 Enviar WhatsApp
+          </a>
+        </div>
+      </div>
+
+      <!-- Tarjeta 8: Laura Giménez (CV / Postulante) -->
+      <div class="tarjeta-card" data-category="cvs"
+        data-keywords="laura gimenez cv curriculum vitae administracion secretaria secretaria facturacion excel atencion cliente administracion">
         <div class="tarjeta-img-container" onclick="openLightbox('assets/cv_laura_gimenez.png')">
           <img class="tarjeta-img" src="assets/cv_laura_gimenez.png" alt="CV Laura Giménez" loading="lazy">
           <div class="tarjeta-zoom-overlay">🔍 Ampliar</div>
@@ -601,27 +757,33 @@
           <span class="tarjeta-cat-badge">CV / Postulante</span>
           <h3 class="tarjeta-title">Laura Giménez</h3>
           <p class="tarjeta-desc">
-            Estudiante de Lic. en Administración, con experiencia en atención al cliente, facturación y manejo de planillas Excel. Excelente trato y disponibilidad horaria.
+            Estudiante de Lic. en Administración, con experiencia en atención al cliente, facturación y manejo de
+            planillas Excel. Excelente trato y disponibilidad horaria.
           </p>
-          <a class="btn-wa-contact" href="#" onclick="irAContactar('5493743454291', 'Hola Laura! Vi tu CV en ITe y quería consultarte por una búsqueda de empleo.'); return false;">
+          <a class="btn-wa-contact" href="#"
+            onclick="irAContactar('5493743454291', 'Hola Laura! Vi tu CV en ITe y quería consultarte por una búsqueda de empleo.'); return false;">
             📲 Enviar WhatsApp
           </a>
         </div>
       </div>
 
-      <!-- Tarjeta 8: Mateo Kaczarek (CV / Postulante) -->
-      <div class="tarjeta-card" data-category="cvs" data-keywords="mateo kaczarek cv curriculum vitae enfermero enfermeria acompañante terapeutico salud cuidados domiciliarios inyectables primeros auxilios">
-        <div class="tarjeta-img-container" onclick="openLightbox('assets/cv_mateo_kaczarek.png')">
-          <img class="tarjeta-img" src="assets/cv_mateo_kaczarek.png" alt="CV Mateo Kaczarek" loading="lazy">
+      <!-- Tarjeta 9: Wolhein Gabriel (CV / Postulante) -->
+      <div class="tarjeta-card" data-category="cvs"
+        data-keywords="mateo kaczarek cv curriculum vitae enfermero enfermeria acompañante terapeutico salud cuidados domiciliarios inyectables primeros auxilios">
+        <div class="tarjeta-img-container" onclick="openLightbox('assets/cv_wolhein_gabriel.png')">
+          <img class="tarjeta-img" src="assets/cv_wolhein_gabriel.png" alt="CV Wolhein Gabriel" loading="lazy">
           <div class="tarjeta-zoom-overlay">🔍 Ampliar</div>
         </div>
         <div class="tarjeta-info">
           <span class="tarjeta-cat-badge">CV / Postulante</span>
-          <h3 class="tarjeta-title">Mateo Kaczarek</h3>
+          <h3 class="tarjeta-title">Wolhein Gabriel</h3>
           <p class="tarjeta-desc">
-            Enfermero egresado de la UNaM, con experiencia en cuidados domiciliarios, aplicación de inyectables, toma de presión y primeros auxilios. Referencias comprobables.
+            Desarrollador de Soluciones y automatizaciones con experiencia en el análisis, diseño, desarrollo y puesta
+            en marcha de sistemas informáticos a medida. Automatización de procesos y soluciones tecnológicas para
+            empresas.
           </p>
-          <a class="btn-wa-contact" href="#" onclick="irAContactar('5493743454291', 'Hola Mateo! Vi tu CV en ITe y quería consultarte por una búsqueda de empleo.'); return false;">
+          <a class="btn-wa-contact" href="#"
+            onclick="irAContactar('5493743454291', 'Hola Gabriel! Vi tu CV en ITe y quería consultarte por una búsqueda de empleo.'); return false;">
             📲 Enviar WhatsApp
           </a>
         </div>
@@ -640,7 +802,8 @@
     <div class="sumar-tarjeta-box">
       <h2>¿Querés publicar tu tarjeta en el tablero?</h2>
       <p>
-        Si sos profesional, tenés un comercio, prestás algún servicio o tenés un emprendimiento en Jardín América, sumate de forma completamente gratuita.
+        Si sos profesional, tenés un comercio, prestás algún servicio o tenés un emprendimiento en Jardín América,
+        sumate de forma completamente gratuita.
       </p>
       <a class="btn-sumar" href="#" onclick="irAlAdmin('Hola! Quiero publicar mi tarjeta'); return false;">
         📲 Sumar mi Tarjeta Gratis
@@ -680,7 +843,7 @@
       const url = `https://wa.me/${numero}?text=${encodeURIComponent(texto)}`;
       window.open(url, '_blank', 'noopener');
     }
-    
+
     // Redirige al número del administrador
     function irAlAdmin(texto) {
       _abrirWA(WA_ADMIN, texto);
@@ -727,15 +890,15 @@
         const keywords = card.getAttribute('data-keywords') || '';
         const title = card.querySelector('.tarjeta-title').textContent.toLowerCase();
         const desc = card.querySelector('.tarjeta-desc').textContent.toLowerCase();
-        
+
         // Coincidencia de Categoría
         const categoryMatch = (currentCategory === 'todos' || category === currentCategory);
 
         // Coincidencia de Búsqueda (busca en título, descripción y palabras clave)
-        const textMatch = !searchQuery || 
-                           title.includes(searchQuery) || 
-                           desc.includes(searchQuery) || 
-                           keywords.includes(searchQuery);
+        const textMatch = !searchQuery ||
+          title.includes(searchQuery) ||
+          desc.includes(searchQuery) ||
+          keywords.includes(searchQuery);
 
         if (categoryMatch && textMatch) {
           card.style.display = 'flex';
@@ -783,4 +946,5 @@
   </script>
 
 </body>
+
 </html>
