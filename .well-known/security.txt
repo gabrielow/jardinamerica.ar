@@ -1,0 +1,18 @@
+# Contactos para reportar problemas de seguridad
+Contact: mailto:jardinamerica.ar@gmail.com
+Contact: tel:+54-9-3743-454291
+
+# Fecha en la que este archivo expirará (1 año a partir de hoy)
+Expires: 2027-06-23T03:51:49.000Z
+
+# Idioma preferido para las comunicaciones
+Preferred-Languages: es
+
+# Clave pública PGP para cifrar las comunicaciones
+Encryption: https://jardinamerica.ar/pgp-key.txt
+
+# Página de agradecimientos para investigadores de seguridad
+Acknowledgments: https://ite.ar
+
+# Política detallada de seguridad
+Policy: https://jardinamerica.ar/seguridad.html
