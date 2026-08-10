@@ -5,10 +5,64 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Tablero de Tarjetas — ITe Jardín América</title>
-  <meta name="description"
-    content="Cartelera digital de profesionales, emprendimientos y empresas de Jardín América, Misiones.">
+  <meta name="description" content="Cartelera digital y directorio de emprendimientos, profesionales, servicios y CVs de Jardín América, Misiones. Contacto directo por WhatsApp.">
+
+  <meta property="og:title" content="Tablero de Tarjetas — ITe Jardín América">
+  <meta property="og:description"
+    content="Cartelera digital y directorio de emprendimientos, profesionales, servicios y CVs de Jardín América, Misiones. Contacto directo por WhatsApp.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://jardinamerica.ar/tablero.html">
+  <meta property="og:site_name" content="ITe Jardín América">
+  <meta property="og:locale" content="es_AR">
+  <meta property="og:image" content="https://jardinamerica.ar/assets/escudo_jardin_america.jpg">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Tablero de Tarjetas — ITe Jardín América">
+  <meta name="twitter:description" content="Cartelera digital de servicios, comercios, fletes y profesionales en Jardín América, Misiones.">
+  <meta name="twitter:image" content="https://jardinamerica.ar/assets/escudo_jardin_america.jpg">
+  <link rel="canonical" href="https://jardinamerica.ar/tablero.html">
   <link rel="icon"
     href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>💜</text></svg>">
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "ItemList",
+    "name": "Cartelera Digital de Emprendimientos y Servicios de Jardín América",
+    "url": "https://jardinamerica.ar/tablero.html",
+    "itemListElement": [
+      {
+        "@type": "ListItem",
+        "position": 1,
+        "name": "Maderas del Norte",
+        "description": "Venta de maderas en general, machimbres, tirantes y kits de casas en Jardín América."
+      },
+      {
+        "@type": "ListItem",
+        "position": 2,
+        "name": "Somer Celulares",
+        "description": "Servicio técnico y reparación de celulares en Jardín América."
+      },
+      {
+        "@type": "ListItem",
+        "position": 3,
+        "name": "MID Informática",
+        "description": "Servicio técnico de PC, notebooks y celulares en Jardín América."
+      },
+      {
+        "@type": "ListItem",
+        "position": 4,
+        "name": "Mini Fletes",
+        "description": "Servicio de fletes, mudanzas y traslados en Jardín América."
+      },
+      {
+        "@type": "ListItem",
+        "position": 5,
+        "name": "Aberturas METALUM",
+        "description": "Carpintería en aluminio a medida en Jardín América."
+      }
+    ]
+  }
+  </script>
+
   <style>
     /* ── Variables (coincidentes con index.html) ─────────────── */
     :root {
@@ -907,6 +961,26 @@
         </div>
       </div>
 
+      <!-- Tarjeta 16: Maderas del Norte (Empresa) -->
+      <div class="tarjeta-card" data-category="empresas"
+        data-keywords="maderas del norte venta de maderas en general machimbres vigas tirantes clavadores tablas cortes a medida kit de corte de casa manual de armado viviendas llave en mano construccion carpinteria madera jardin america misiones">
+        <div class="tarjeta-img-container" onclick="openLightbox('assets/maderas_del_norte.jpeg')">
+          <img class="tarjeta-img" src="assets/maderas_del_norte.jpeg" alt="Maderas del Norte" loading="lazy">
+          <div class="tarjeta-zoom-overlay">🔍 Ampliar</div>
+        </div>
+        <div class="tarjeta-info">
+          <span class="tarjeta-cat-badge">Empresas</span>
+          <h3 class="tarjeta-title">Maderas del Norte</h3>
+          <p class="tarjeta-desc">
+            Venta de maderas en general: machimbres, vigas, tirantes, clavadores, tablas y cortes a medida. Kits de casas para armar con manual de armado y consultas por viviendas llave en mano en Jardín América.
+          </p>
+          <a class="btn-wa-contact" href="#"
+            onclick="irAContactar('5493743516095', 'Hola! Vi tu tarjeta de Maderas del Norte en ITe y quería hacerte una consulta.'); return false;">
+            📲 Enviar WhatsApp
+          </a>
+        </div>
+      </div>
+
       <!-- Mensaje de no resultados -->
       <div class="no-results" id="no-results">
         <div class="no-results-icon">🔍</div>
@@ -978,8 +1052,26 @@
     const tarjetaCards = document.querySelectorAll('.tarjeta-card');
     const noResults = document.getElementById('no-results');
 
+    // Mezcla aleatoria de tarjetas (Fisher-Yates Shuffle)
+    function mezclarTarjetas() {
+      const grid = document.getElementById('tablero-grid');
+      if (!grid) return;
+      const cards = Array.from(grid.querySelectorAll('.tarjeta-card'));
+      
+      for (let i = cards.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [cards[i], cards[j]] = [cards[j], cards[i]];
+      }
+      
+      cards.forEach(card => grid.insertBefore(card, noResults));
+    }
+
+    // Ejecutar mezcla al inicializar
+    mezclarTarjetas();
+
     let currentCategory = 'todos';
     let searchQuery = '';
+
 
     // Manejador del Input de Búsqueda
     searchInput.addEventListener('input', (e) => {

@@ -1,0 +1,14 @@
+# ITe Jardín América — Plataforma Local y Cartelera Digital
+
+> ITe (jardinamerica.ar) es la plataforma de gestión de turnos por WhatsApp y la cartelera digital de emprendimientos, profesionales y servicios de Jardín América, Misiones, Argentina.
+
+## Servicios Principales
+- [Gestión de Turnos por WhatsApp](https://jardinamerica.ar/index.html): Sistema conversacional sin apps ni descargas para municipios, centros de salud y organizaciones públicas y privadas.
+- [Cartelera Digital de Servicios y Emprendimientos](https://jardinamerica.ar/tablero.html): Directorio local con contacto directo por WhatsApp para profesionales, comercios, fletes, reparaciones y postulantes de empleo en Jardín América.
+
+## Rubros Destacados en Jardín América
+- **Servicios Técnicos & Reparaciones**: Reparación de celulares (Somer Celulares), Servicio técnico informático (MID Informática, CR Informática).
+- **Construcción & Hogar**: Venta de maderas y viviendas (Maderas del Norte), Carpintería en aluminio y aberturas (METALUM), Construcciones y refacciones (Miguel Angel Gitzel).
+- **Servicios Domiciliarios & Fletes**: Mini Fletes (mudanzas y traslados), Lavandería (Fer Kia), Enfermería a domicilio (Mariana Gonzales), Masoterapia y terapias corporales (LF-Masoterapia).
+- **Comercio Local**: Frutería y Verdulería Gabys.
+- **Postulantes de Empleo**: CVs de profesionales y trabajadores locales.

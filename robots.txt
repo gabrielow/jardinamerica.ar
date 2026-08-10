@@ -1,0 +1,17 @@
+User-agent: *
+Allow: /
+
+# Permitir explícitamente Bots de IA para posicionamiento GEO
+User-agent: GPTBot
+Allow: /
+
+User-agent: PerplexityBot
+Allow: /
+
+User-agent: ClaudeBot
+Allow: /
+
+User-agent: Google-Extended
+Allow: /
+
+Sitemap: https://jardinamerica.ar/sitemap.xml
