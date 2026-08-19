@@ -22,6 +22,7 @@
   <link rel="canonical" href="https://jardinamerica.ar/tablero.html">
   <link rel="icon"
     href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>💜</text></svg>">
+  <link rel="stylesheet" href="assets/style.css">
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
@@ -64,79 +65,13 @@
   </script>
 
   <style>
-    /* ── Variables (coincidentes con index.html) ─────────────── */
-    :root {
-      --purple: #7c35ef;
-      --purple-dark: #430a9c;
-      --purple-light: #f5f0ff;
-      --purple-mid: #9456ff;
-      --blue-ar: #0055A4;
-      --green-wa: #169853;
-      --green-wa-dk: #0e753e;
-      --text: #0f1219;
-      --muted: #6b778c;
-      --border: #ebedf2;
-      --bg-alt: #f3f5f9;
-      --radius: 12px;
-      --shadow: 0 2px 16px rgba(0, 0, 0, .08);
-      --shadow-md: 0 4px 24px rgba(0, 0, 0, .12);
-    }
-
-    /* ── Reset ─────────────────────────────────────────────── */
-    *,
-    *::before,
-    *::after {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
-    }
-
-    body {
-      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
-      color: var(--text);
-      line-height: 1.6;
-      background: #fdfdfd;
-    }
+    /* ── Overrides base (tablero) ──────────────────────────── */
+    body { background: #fdfdfd; }
 
     img {
       max-width: 100%;
       height: auto;
       display: block;
-    }
-
-    a {
-      color: inherit;
-      text-decoration: none;
-    }
-
-    /* ── Navbar ────────────────────────────────────────────── */
-    .navbar {
-      position: sticky;
-      top: 0;
-      z-index: 100;
-      background: rgba(255, 255, 255, .93);
-      backdrop-filter: blur(10px);
-      border-bottom: 1px solid var(--border);
-      padding: .85rem 0;
-    }
-
-    .navbar .container {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      max-width: 1060px;
-      margin: 0 auto;
-      padding: 0 1.25rem;
-      gap: 1rem;
-    }
-
-    .navbar-brand {
-      font-weight: 800;
-      font-size: 1.15rem;
-      color: var(--purple);
-      display: flex;
-      align-items: center;
-      gap: .4rem;
     }
 
     .btn-back {
@@ -158,12 +93,6 @@
       text-align: center;
       padding: 3rem 0 2rem 0;
       background: linear-gradient(180deg, var(--purple-light) 0%, rgba(253, 253, 253, 1) 100%);
-    }
-
-    .container {
-      max-width: 1060px;
-      margin: 0 auto;
-      padding: 0 1.25rem;
     }
 
     .badge {
@@ -524,42 +453,6 @@
       color: var(--purple-light);
     }
 
-    /* ── Footer ─────────────────────────────────────────────── */
-    footer {
-      background: #0f172a;
-      color: #64748b;
-      padding: 2.25rem 0;
-      font-size: .85rem;
-    }
-
-    footer .container {
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: space-between;
-      align-items: center;
-      gap: 1rem;
-    }
-
-    footer a {
-      color: #64748b;
-    }
-
-    footer a:hover {
-      color: #fff;
-    }
-
-    .footer-brand {
-      color: #fff;
-      font-weight: 700;
-      font-size: .95rem;
-    }
-
-    .footer-links {
-      display: flex;
-      gap: 1.25rem;
-      flex-wrap: wrap;
-    }
-
     /* ── Responsive ─────────────────────────────────────────── */
     @media (max-width: 600px) {
       .header-section {
@@ -585,16 +478,11 @@
 
 <body>
 
-  <!-- Números de WhatsApp -->
-  <script>
-    const WA_ADMIN = '5493743454291'; // Administración ITe
-  </script>
-
   <!-- ── Navbar ───────────────────────────────────────────────── -->
   <nav class="navbar">
     <div class="container">
       <a class="navbar-brand" href="index.html" style="display: flex; align-items: center; gap: 0.5rem;">
-        <img src="assets/escudo_jardin_america.jpg" alt="Escudo"
+        <img src="assets/escudo_jardin_america.webp" alt="Escudo"
           style="height: 28px; width: 28px; object-fit: contain; border-radius: 4px;">
         ITe
       </a>
@@ -608,7 +496,7 @@
   <header class="header-section">
     <div class="container">
       <div style="margin-bottom: 1rem; display: flex; justify-content: center;">
-        <img src="assets/escudo_jardin_america.jpg" alt="Escudo de Jardín América"
+        <img src="assets/escudo_jardin_america.webp" alt="Escudo de Jardín América" width="945" height="1024"
           style="height: 70px; width: auto; border-radius: 8px; box-shadow: 0 4px 12px rgba(0,0,0,0.1); border: 2px solid #fff;">
       </div>
       <span class="badge badge-purple">📍 JARDÍN AMÉRICA, MISIONES</span>
@@ -637,6 +525,7 @@
         <button class="btn-filter" data-category="emprendimientos">Emprendimientos</button>
         <button class="btn-filter" data-category="empresas">Empresas</button>
         <button class="btn-filter" data-category="cvs">CVs Personales</button>
+        <span class="result-count" id="result-count" style="margin-left:auto; font-size:.82rem; color:var(--muted); font-weight:600;"></span>
       </div>
     </div>
 
@@ -646,8 +535,8 @@
       <!-- Tarjeta 1: Wolhein Gabriel (CV / Postulante) -->
       <div class="tarjeta-card" data-category="cvs"
         data-keywords="wolhein gabriel cv curriculum vitae desarrollador programador sistemas informatica automatizaciones software desarrollo tecnologia">
-        <div class="tarjeta-img-container" onclick="openLightbox('assets/cv_wolhein_gabriel.png')">
-          <img class="tarjeta-img" src="assets/cv_wolhein_gabriel.png" alt="CV Wolhein Gabriel" loading="lazy">
+        <div class="tarjeta-img-container" onclick="openLightbox('assets/cv_wolhein_gabriel.webp')">
+          <img class="tarjeta-img" src="assets/cv_wolhein_gabriel.webp" width="1024" height="1024" alt="CV Wolhein Gabriel" loading="lazy">
           <div class="tarjeta-zoom-overlay">🔍 Ampliar</div>
         </div>
         <div class="tarjeta-info">
@@ -658,7 +547,7 @@
             en marcha de sistemas informáticos a medida. Automatización de procesos y soluciones tecnológicas para
             empresas.
           </p>
-          <a class="btn-wa-contact" href="#"
+          <a class="btn-wa-contact" href="https://wa.me/5493743454291?text=Hola Gabriel! Vi tu CV en ITe y quería consultarte por una búsqueda de empleo."
             onclick="irAContactar('5493743454291', 'Hola Gabriel! Vi tu CV en ITe y quería consultarte por una búsqueda de empleo.'); return false;">
             📲 Enviar WhatsApp
           </a>
@@ -668,8 +557,8 @@
       <!-- Tarjeta 2: RELTEC Soluciones (Profesional/Empresa) -->
       <div class="tarjeta-card" data-category="profesionales"
         data-keywords="refrigeracion aire acondicionado split electricista electricidad instalacion tecnologia domotica automatizacion alarmas camaras reltec">
-        <div class="tarjeta-img-container" onclick="openLightbox('assets/reltec_soluciones.jpeg')">
-          <img class="tarjeta-img" src="assets/reltec_soluciones.jpeg" alt="RELTEC Soluciones" loading="lazy">
+        <div class="tarjeta-img-container" onclick="openLightbox('assets/reltec_soluciones.webp')">
+          <img class="tarjeta-img" src="assets/reltec_soluciones.webp" width="701" height="1108" alt="RELTEC Soluciones" loading="lazy">
           <div class="tarjeta-zoom-overlay">🔍 Ampliar</div>
         </div>
         <div class="tarjeta-info">
@@ -680,12 +569,12 @@
             domiciliarias e industriales, y domótica/automatización.
           </p>
           <div style="display:flex; gap:.5rem;">
-            <a class="btn-wa-contact" href="#"
+            <a class="btn-wa-contact" href="https://wa.me/5493743441580?text=Hola Kevin! Vi tu tarjeta de RELTEC en ITe y quería consultarte por un servicio."
               onclick="irAContactar('5493743441580', 'Hola Kevin! Vi tu tarjeta de RELTEC en ITe y quería consultarte por un servicio.'); return false;"
               style="flex:1;">
               📲 Kevin
             </a>
-            <a class="btn-wa-contact" href="#"
+            <a class="btn-wa-contact" href="https://wa.me/5493757508282?text=Hola Angelo! Vi tu tarjeta de RELTEC en ITe y quería consultarte por un servicio."
               onclick="irAContactar('5493757508282', 'Hola Angelo! Vi tu tarjeta de RELTEC en ITe y quería consultarte por un servicio.'); return false;"
               style="flex:1; background:#0055A4;">
               📲 Angelo
@@ -697,8 +586,8 @@
       <!-- Tarjeta 3: Lavandería Fer Kia (Emprendimiento) -->
       <div class="tarjeta-card" data-category="emprendimientos"
         data-keywords="lavanderia lavarropa ropa secar frazadas acolchados ferkia lavadero limpieza ropa">
-        <div class="tarjeta-img-container" onclick="openLightbox('assets/lavanderia_ferkia.jpeg')">
-          <img class="tarjeta-img" src="assets/lavanderia_ferkia.jpeg" alt="Lavandería Fer Kia" loading="lazy">
+        <div class="tarjeta-img-container" onclick="openLightbox('assets/lavanderia_ferkia.webp')">
+          <img class="tarjeta-img" src="assets/lavanderia_ferkia.webp" width="1086" height="1448" alt="Lavandería Fer Kia" loading="lazy">
           <div class="tarjeta-zoom-overlay">🔍 Ampliar</div>
         </div>
         <div class="tarjeta-info">
@@ -708,7 +597,7 @@
             Servicio de lavado de frazadas, acolchados y ropa por docena. Prendas limpias, suaves y perfumadas.
             Dirección: Juan M. de Rosa Mz C - Casa 11.
           </p>
-          <a class="btn-wa-contact" href="#"
+          <a class="btn-wa-contact" href="https://wa.me/5493743472667?text=Hola! Vi tu tarjeta de Lavandería Fer Kia en ITe y quería consultarte por un servicio."
             onclick="irAContactar('5493743472667', 'Hola! Vi tu tarjeta de Lavandería Fer Kia en ITe y quería consultarte por un servicio.'); return false;">
             📲 Enviar WhatsApp
           </a>
@@ -718,8 +607,8 @@
       <!-- Tarjeta 4: LF-Masoterapia y Terapias Corporales (Profesional) -->
       <div class="tarjeta-card" data-category="profesionales"
         data-keywords="lf masoterapia masajes terapias corporales descontracturantes relajantes puntos dolor maderoterapia ventosas piedras calientes drenaje linfatico facial pies piernas cansadas salud bienestar femenino profesional matriculada">
-        <div class="tarjeta-img-container" onclick="openLightbox('assets/lf_masoterapia.jpeg')">
-          <img class="tarjeta-img" src="assets/lf_masoterapia.jpeg" alt="LF-Masoterapia y Terapias Corporales"
+        <div class="tarjeta-img-container" onclick="openLightbox('assets/lf_masoterapia.webp')">
+          <img class="tarjeta-img" src="assets/lf_masoterapia.webp" width="908" height="1280" alt="LF-Masoterapia y Terapias Corporales"
             loading="lazy">
           <div class="tarjeta-zoom-overlay">🔍 Ampliar</div>
         </div>
@@ -730,7 +619,7 @@
             Masajes descontracturantes, relajantes, maderoterapia, piedras calientes, ventosas, drenaje linfático y
             masaje facial. Especialidad en salud y bienestar femenino. Profesional matriculada (Mat. N° 155/24).
           </p>
-          <a class="btn-wa-contact" href="#"
+          <a class="btn-wa-contact" href="https://wa.me/5493743481476?text=Hola! Vi tu tarjeta de LF-Masoterapia en ITe y quería consultarte por un turno."
             onclick="irAContactar('5493743481476', 'Hola! Vi tu tarjeta de LF-Masoterapia en ITe y quería consultarte por un turno.'); return false;">
             📲 Enviar WhatsApp
           </a>
@@ -740,8 +629,8 @@
       <!-- Tarjeta 5: CR Informática (Profesional/Servicio) -->
       <div class="tarjeta-card" data-category="profesionales"
         data-keywords="cr informatica computacion computadoras servicio tecnico reparacion mantenimiento soporte formateo windows pc notebook netbook jardin america misiones">
-        <div class="tarjeta-img-container" onclick="openLightbox('assets/cr_informatica.jpeg')">
-          <img class="tarjeta-img" src="assets/cr_informatica.jpeg" alt="CR Informática" loading="lazy">
+        <div class="tarjeta-img-container" onclick="openLightbox('assets/cr_informatica.webp')">
+          <img class="tarjeta-img" src="assets/cr_informatica.webp" width="1170" height="1194" alt="CR Informática" loading="lazy">
           <div class="tarjeta-zoom-overlay">🔍 Ampliar</div>
         </div>
         <div class="tarjeta-info">
@@ -751,7 +640,7 @@
             Servicio técnico especializado en computación en Jardín América. Mantenimiento, soporte y reparación de
             computadoras, notebooks y equipos informáticos.
           </p>
-          <a class="btn-wa-contact" href="#"
+          <a class="btn-wa-contact" href="https://wa.me/5493743486866?text=Hola! Vi tu tarjeta de CR Informática en ITe y quería hacerte una consulta."
             onclick="irAContactar('5493743486866', 'Hola! Vi tu tarjeta de CR Informática en ITe y quería hacerte una consulta.'); return false;">
             📲 Enviar WhatsApp
           </a>
@@ -761,8 +650,8 @@
       <!-- Tarjeta 6: Aberturas METALUM (Empresa) -->
       <div class="tarjeta-card" data-category="empresas"
         data-keywords="aberturas metalum carpinteria aluminio ventanas puertas portones cerramientos perfiles metalica jardin america misiones atm">
-        <div class="tarjeta-img-container" onclick="openLightbox('assets/metalum_aberturas.jpeg')">
-          <img class="tarjeta-img" src="assets/metalum_aberturas.jpeg" alt="Aberturas METALUM" loading="lazy">
+        <div class="tarjeta-img-container" onclick="openLightbox('assets/metalum_aberturas.webp')">
+          <img class="tarjeta-img" src="assets/metalum_aberturas.webp" width="1254" height="1254" alt="Aberturas METALUM" loading="lazy">
           <div class="tarjeta-zoom-overlay">🔍 Ampliar</div>
         </div>
         <div class="tarjeta-info">
@@ -772,7 +661,7 @@
             Carpintería en aluminio a medida en Jardín América. Fabricación y colocación de aberturas, ventanas, puertas
             y cerramientos de aluminio de alta calidad.
           </p>
-          <a class="btn-wa-contact" href="#"
+          <a class="btn-wa-contact" href="https://wa.me/5493743474818?text=Hola! Vi tu tarjeta de Aberturas Metalum en ITe y quería solicitar un presupuesto/consulta."
             onclick="irAContactar('5493743474818', 'Hola! Vi tu tarjeta de Aberturas Metalum en ITe y quería solicitar un presupuesto/consulta.'); return false;">
             📲 Enviar WhatsApp
           </a>
@@ -782,8 +671,8 @@
       <!-- Tarjeta 7: Frutería Verdulería Gabys (Emprendimiento) -->
       <div class="tarjeta-card" data-category="emprendimientos"
         data-keywords="fruteria verduleria gabys gabis frutas verduras solo calidad jardin america misiones almacen saludable verdulero frutero">
-        <div class="tarjeta-img-container" onclick="openLightbox('assets/fruteria_verduleria_gabys.jpeg')">
-          <img class="tarjeta-img" src="assets/fruteria_verduleria_gabys.jpeg" alt="Frutería Verdulería Gabys"
+        <div class="tarjeta-img-container" onclick="openLightbox('assets/fruteria_verduleria_gabys.webp')">
+          <img class="tarjeta-img" src="assets/fruteria_verduleria_gabys.webp" width="720" height="736" alt="Frutería Verdulería Gabys"
             loading="lazy">
           <div class="tarjeta-zoom-overlay">🔍 Ampliar</div>
         </div>
@@ -794,7 +683,7 @@
             Venta de frutas y verduras seleccionadas de excelente calidad en Jardín América. Productos frescos todos los
             días.
           </p>
-          <a class="btn-wa-contact" href="#"
+          <a class="btn-wa-contact" href="https://wa.me/5493743481909?text=Hola! Vi tu tarjeta de Frutería Verdulería Gabys en ITe y quería hacerte una consulta."
             onclick="irAContactar('5493743481909', 'Hola! Vi tu tarjeta de Frutería Verdulería Gabys en ITe y quería hacerte una consulta.'); return false;">
             📲 Enviar WhatsApp
           </a>
@@ -804,8 +693,8 @@
       <!-- Tarjeta 8: Gonzales Mariana (Emprendimiento) -->
       <div class="tarjeta-card" data-category="emprendimientos"
         data-keywords="enfermeria a domicilio cuidados inyectables salud curaciones signos vitales asistencia acompañamiento terapeutico gonzales mariana jardin america">
-        <div class="tarjeta-img-container" onclick="openLightbox('assets/GonzalesMariana.jpeg')">
-          <img class="tarjeta-img" src="assets/GonzalesMariana.jpeg" alt="Enfermeria a Domicilio" loading="lazy">
+        <div class="tarjeta-img-container" onclick="openLightbox('assets/GonzalesMariana.webp')">
+          <img class="tarjeta-img" src="assets/GonzalesMariana.webp" width="864" height="1224" alt="Enfermeria a Domicilio" loading="lazy">
           <div class="tarjeta-zoom-overlay">🔍 Ampliar</div>
         </div>
         <div class="tarjeta-info">
@@ -815,7 +704,7 @@
             Enfermeria a domicilio en Jardín América. Realizamos curaciones, inyectables, asistencia al paciente,
             control de signos vitales y acompañamiento terapéutico.
           </p>
-          <a class="btn-wa-contact" href="#"
+          <a class="btn-wa-contact" href="https://wa.me/5493743616393?text=Hola! Vi tu tarjeta de Enfermeria a Domicilio en ITe y quería hacerte una consulta."
             onclick="irAContactar('5493743616393', 'Hola! Vi tu tarjeta de Enfermeria a Domicilio en ITe y quería hacerte una consulta.'); return false;">
             📲 Enviar WhatsApp
           </a>
@@ -825,8 +714,8 @@
       <!-- Tarjeta 9: Miguel Angel Gitzel (Empresa) -->
       <div class="tarjeta-card" data-category="emprendimientos"
         data-keywords="construcciones miguel angel gitzel refacciones ampliaciones remodelaciones reparaciones mejoras albañileria obras jardin america">
-        <div class="tarjeta-img-container" onclick="openLightbox('assets/Const_gitzel.jpeg')">
-          <img class="tarjeta-img" src="assets/Const_gitzel.jpeg" alt="Construcciones Miguel Angel Gitzel"
+        <div class="tarjeta-img-container" onclick="openLightbox('assets/Const_gitzel.webp')">
+          <img class="tarjeta-img" src="assets/Const_gitzel.webp" width="640" height="640" alt="Construcciones Miguel Angel Gitzel"
             loading="lazy">
           <div class="tarjeta-zoom-overlay">🔍 Ampliar</div>
         </div>
@@ -837,7 +726,7 @@
             Construcciones Miguel Angel Gitzel en Jardín América. Realizamos construcciones, refacciones, ampliaciones,
             remodelaciones, reparaciones, mejoras, trabajos en general
           </p>
-          <a class="btn-wa-contact" href="#" onclick="irAContactar('5493743455776', 'Hola! Vi tu tarjeta de Construcciones Miguel Angel Gitzel en ITe.ar y quería hacerte una consulta.'); return false;">
+          <a class="btn-wa-contact" href="https://wa.me/5493743455776?text=Hola! Vi tu tarjeta de Construcciones Miguel Angel Gitzel en ITe.ar y quería hacerte una consulta." onclick="irAContactar('5493743455776', 'Hola! Vi tu tarjeta de Construcciones Miguel Angel Gitzel en ITe.ar y quería hacerte una consulta.'); return false;">
             📲 Enviar WhatsApp
           </a>
         </div>
@@ -846,8 +735,8 @@
       <!-- Tarjeta 10: Laura Giménez (CV / Postulante) -->
       <div class="tarjeta-card" data-category="cvs"
         data-keywords="laura gimenez cv curriculum vitae administracion secretaria secretaria facturacion excel atencion cliente administracion">
-        <div class="tarjeta-img-container" onclick="openLightbox('assets/cv_laura_gimenez.png')">
-          <img class="tarjeta-img" src="assets/cv_laura_gimenez.png" alt="CV Laura Giménez" loading="lazy">
+        <div class="tarjeta-img-container" onclick="openLightbox('assets/cv_laura_gimenez.webp')">
+          <img class="tarjeta-img" src="assets/cv_laura_gimenez.webp" width="1024" height="1024" alt="CV Laura Giménez" loading="lazy">
           <div class="tarjeta-zoom-overlay">🔍 Ampliar</div>
         </div>
         <div class="tarjeta-info">
@@ -857,36 +746,17 @@
             Estudiante de Lic. en Administración, con experiencia en atención al cliente, facturación y manejo de
             planillas Excel. Excelente trato y disponibilidad horaria.
           </p>
-          <a class="btn-wa-contact" href="#"
+          <a class="btn-wa-contact" href="https://wa.me/5493743454291?text=Hola Laura! Vi tu CV en ITe y quería consultarte por una búsqueda de empleo."
             onclick="irAContactar('5493743454291', 'Hola Laura! Vi tu CV en ITe y quería consultarte por una búsqueda de empleo.'); return false;">
             📲 Enviar WhatsApp
           </a>
         </div>
       </div>
 
-      <!-- Tarjeta 11: Laura Gimenez (CV / Postulante) -->
-      <div class="tarjeta-card" data-category="cvs"
-        data-keywords="laura gimenez cv postulante empleo busco trabajo empleada comercio atencion al cliente ventas">
-        <div class="tarjeta-img-container" onclick="openLightbox('assets/cv_laura_gimenez.jpeg')">
-          <img class="tarjeta-img" src="assets/cv_laura_gimenez.jpeg" alt="CV Laura Gimenez" loading="lazy">
-          <div class="tarjeta-zoom-overlay">🔍 Ampliar</div>
-        </div>
-        <div class="tarjeta-info">
-          <span class="tarjeta-cat-badge">CV / Postulante</span>
-          <h3 class="tarjeta-title">Laura Gimenez</h3>
-          <p class="tarjeta-desc">
-            CV - Postulante a empleo (empleada de comercio).
-          </p>
-          <a class="btn-wa-contact" href="#" onclick="irAContactar('5493743123456', 'Hola! Vi tu CV de Laura Gimenez en ITe y quería consultarte sobre una oportunidad laboral.'); return false;">
-            📲 Enviar WhatsApp
-          </a>
-        </div>
-      </div>
-
-      <!-- Tarjeta 12: Mateo Kaczarek (CV / Postulante) -->
+      <!-- Tarjeta 11: Mateo Kaczarek (CV / Postulante) -->
       <div class="tarjeta-card" data-category="cvs" data-keywords="mateo kaczarek cv postulante empleo busco trabajo enfermero enfermeria acompañante terapeutico salud">
-        <div class="tarjeta-img-container" onclick="openLightbox('assets/cv_mateo_kaczarek.jpeg')">
-          <img class="tarjeta-img" src="assets/cv_mateo_kaczarek.jpeg" alt="CV Mateo Kaczarek" loading="lazy">
+        <div class="tarjeta-img-container" onclick="openLightbox('assets/cv_mateo_kaczarek.webp')">
+          <img class="tarjeta-img" src="assets/cv_mateo_kaczarek.webp" width="1024" height="1024" alt="CV Mateo Kaczarek" loading="lazy">
           <div class="tarjeta-zoom-overlay">🔍 Ampliar</div>
         </div>
         <div class="tarjeta-info">
@@ -895,17 +765,17 @@
           <p class="tarjeta-desc">
             CV - Postulante a empleo (enfermero, acompañante terapéutico).
           </p>
-          <a class="btn-wa-contact" href="#" onclick="irAContactar('5493743987654', 'Hola! Vi tu CV de Mateo Kaczarek en ITe y quería consultarte sobre una oportunidad laboral.'); return false;">
+          <a class="btn-wa-contact" href="https://wa.me/5493743987654?text=Hola! Vi tu CV de Mateo Kaczarek en ITe y quería consultarte sobre una oportunidad laboral." onclick="irAContactar('5493743987654', 'Hola! Vi tu CV de Mateo Kaczarek en ITe y quería consultarte sobre una oportunidad laboral.'); return false;">
             📲 Enviar WhatsApp
           </a>
         </div>
       </div>
 
-      <!-- Tarjeta 13: Mini Fletes (Emprendimiento) -->
+      <!-- Tarjeta 12: Mini Fletes (Emprendimiento) -->
       <div class="tarjeta-card" data-category="emprendimientos"
         data-keywords="mini fletes mudanzas traslados fletes en general transporte carga envio jardin america">
-        <div class="tarjeta-img-container" onclick="openLightbox('assets/mini_fletes.jpeg')">
-          <img class="tarjeta-img" src="assets/mini_fletes.jpeg" alt="Mini Fletes" loading="lazy">
+        <div class="tarjeta-img-container" onclick="openLightbox('assets/mini_fletes.webp')">
+          <img class="tarjeta-img" src="assets/mini_fletes.webp" width="720" height="968" alt="Mini Fletes" loading="lazy">
           <div class="tarjeta-zoom-overlay">🔍 Ampliar</div>
         </div>
         <div class="tarjeta-info">
@@ -914,18 +784,18 @@
           <p class="tarjeta-desc">
             Servicio de fletes, mudanzas y traslados en general. Transporte rápido, confiable y seguro en Jardín América.
           </p>
-          <a class="btn-wa-contact" href="#"
+          <a class="btn-wa-contact" href="https://wa.me/5493743449460?text=Hola! Vi tu tarjeta de Mini Fletes en ITe y quería consultarte por un servicio."
             onclick="irAContactar('5493743449460', 'Hola! Vi tu tarjeta de Mini Fletes en ITe y quería consultarte por un servicio.'); return false;">
             📲 Enviar WhatsApp
           </a>
         </div>
       </div>
 
-      <!-- Tarjeta 14: Reparación de Celulares Somer (Profesional) -->
+      <!-- Tarjeta 13: Reparación de Celulares Somer (Profesional) -->
       <div class="tarjeta-card" data-category="profesionales"
         data-keywords="reparacion de celulares somer pantallas baterias pin de carga servicio tecnico mantenimiento soporte repuestos calle brasilia plaza belgrano">
-        <div class="tarjeta-img-container" onclick="openLightbox('assets/somer_celuares.jpeg')">
-          <img class="tarjeta-img" src="assets/somer_celuares.jpeg" alt="Reparación de Celulares Somer" loading="lazy">
+        <div class="tarjeta-img-container" onclick="openLightbox('assets/somer_celuares.webp')">
+          <img class="tarjeta-img" src="assets/somer_celuares.webp" width="683" height="1042" alt="Reparación de Celulares Somer" loading="lazy">
           <div class="tarjeta-zoom-overlay">🔍 Ampliar</div>
         </div>
         <div class="tarjeta-info">
@@ -934,18 +804,18 @@
           <p class="tarjeta-desc">
             Servicio técnico y reparación de celulares en Jardín América. Cambio de pantallas, cambio de baterías, pin de cargas y repuestos de la mejor calidad. Dirección: Calle Brasilia casi Buenos Aires.
           </p>
-          <a class="btn-wa-contact" href="#"
+          <a class="btn-wa-contact" href="https://wa.me/5493743454291?text=Hola! Vi tu tarjeta de Somer Celulares en ITe y quería hacerte una consulta."
             onclick="irAContactar('5493743454291', 'Hola! Vi tu tarjeta de Somer Celulares en ITe y quería hacerte una consulta.'); return false;">
             📲 Enviar WhatsApp
           </a>
         </div>
       </div>
 
-      <!-- Tarjeta 15: MID Informática (Profesional) -->
+      <!-- Tarjeta 14: MID Informática (Profesional) -->
       <div class="tarjeta-card" data-category="profesionales"
         data-keywords="mid informatica servicio tecnico tecnologia reparacion de celulares pc notebooks software limpieza teclados mouse auriculares cargadores cables usb barrio el ceibo quito">
-        <div class="tarjeta-img-container" onclick="openLightbox('assets/mid_informatica.jpeg')">
-          <img class="tarjeta-img" src="assets/mid_informatica.jpeg" alt="MID Informática" loading="lazy">
+        <div class="tarjeta-img-container" onclick="openLightbox('assets/mid_informatica.webp')">
+          <img class="tarjeta-img" src="assets/mid_informatica.webp" width="1024" height="1536" alt="MID Informática" loading="lazy">
           <div class="tarjeta-zoom-overlay">🔍 Ampliar</div>
         </div>
         <div class="tarjeta-info">
@@ -954,18 +824,18 @@
           <p class="tarjeta-desc">
             Servicio técnico de PC, notebooks y celulares en Jardín América. Instalación de software, limpieza de equipos, diagnóstico profesional y venta de accesorios. Dirección: Barrio El Ceibo, Calle Quito S/N.
           </p>
-          <a class="btn-wa-contact" href="#"
+          <a class="btn-wa-contact" href="https://wa.me/5493743566596?text=Hola! Vi tu tarjeta de MID Informática en ITe y quería hacerte una consulta."
             onclick="irAContactar('5493743566596', 'Hola! Vi tu tarjeta de MID Informática en ITe y quería hacerte una consulta.'); return false;">
             📲 Enviar WhatsApp
           </a>
         </div>
       </div>
 
-      <!-- Tarjeta 16: Maderas del Norte (Empresa) -->
+      <!-- Tarjeta 15: Maderas del Norte (Empresa) -->
       <div class="tarjeta-card" data-category="empresas"
         data-keywords="maderas del norte venta de maderas en general machimbres vigas tirantes clavadores tablas cortes a medida kit de corte de casa manual de armado viviendas llave en mano construccion carpinteria madera jardin america misiones">
-        <div class="tarjeta-img-container" onclick="openLightbox('assets/maderas_del_norte.jpeg')">
-          <img class="tarjeta-img" src="assets/maderas_del_norte.jpeg" alt="Maderas del Norte" loading="lazy">
+        <div class="tarjeta-img-container" onclick="openLightbox('assets/maderas_del_norte.webp')">
+          <img class="tarjeta-img" src="assets/maderas_del_norte.webp" width="1024" height="1536" alt="Maderas del Norte" loading="lazy">
           <div class="tarjeta-zoom-overlay">🔍 Ampliar</div>
         </div>
         <div class="tarjeta-info">
@@ -974,18 +844,18 @@
           <p class="tarjeta-desc">
             Venta de maderas en general: machimbres, vigas, tirantes, clavadores, tablas y cortes a medida. Kits de casas para armar con manual de armado y consultas por viviendas llave en mano en Jardín América.
           </p>
-          <a class="btn-wa-contact" href="#"
+          <a class="btn-wa-contact" href="https://wa.me/5493743516095?text=Hola! Vi tu tarjeta de Maderas del Norte en ITe y quería hacerte una consulta."
             onclick="irAContactar('5493743516095', 'Hola! Vi tu tarjeta de Maderas del Norte en ITe y quería hacerte una consulta.'); return false;">
             📲 Enviar WhatsApp
           </a>
         </div>
       </div>
 
-      <!-- Tarjeta 17: Motomandado Richart (Emprendimiento) -->
+      <!-- Tarjeta 16: Motomandado Richart (Emprendimiento) -->
       <div class="tarjeta-card" data-category="emprendimientos"
         data-keywords="motomandado richart mototaxi compras encomienda traslados envio paquetes envios rapidos y seguros jardin america misiones mandados moto delivery">
-        <div class="tarjeta-img-container" onclick="openLightbox('assets/motomandado_richart.jpeg')">
-          <img class="tarjeta-img" src="assets/motomandado_richart.jpeg" alt="Motomandado Richart" loading="lazy">
+        <div class="tarjeta-img-container" onclick="openLightbox('assets/motomandado_richart.webp')">
+          <img class="tarjeta-img" src="assets/motomandado_richart.webp" width="875" height="1599" alt="Motomandado Richart" loading="lazy">
           <div class="tarjeta-zoom-overlay">🔍 Ampliar</div>
         </div>
         <div class="tarjeta-info">
@@ -994,18 +864,18 @@
           <p class="tarjeta-desc">
             Servicio de motomandado, envíos rápidos y seguros en Jardín América y alrededores. Retiro y entrega de compras, mototaxi (traslado de pasajeros) y encomiendas.
           </p>
-          <a class="btn-wa-contact" href="#"
+          <a class="btn-wa-contact" href="https://wa.me/5493743448266?text=Hola! Vi tu tarjeta de Motomandado Richart en ITe y quería hacerte una consulta."
             onclick="irAContactar('5493743448266', 'Hola! Vi tu tarjeta de Motomandado Richart en ITe y quería hacerte una consulta.'); return false;">
             📲 Enviar WhatsApp
           </a>
         </div>
       </div>
 
-      <!-- Tarjeta 18: SL Sonido, Iluminación y Pantalla (Empresa) -->
+      <!-- Tarjeta 17: SL Sonido, Iluminación y Pantalla (Empresa) -->
       <div class="tarjeta-card" data-category="empresas"
         data-keywords="sl sonido iluminacion pantalla pantallas led eventos fiestas shows en vivo eventos sociales empresariales escenarios discotecas jardin america misiones">
-        <div class="tarjeta-img-container" onclick="openLightbox('assets/sl_sonido_iluminacion.jpeg')">
-          <img class="tarjeta-img" src="assets/sl_sonido_iluminacion.jpeg" alt="SL Sonido - Iluminación - Pantalla" loading="lazy">
+        <div class="tarjeta-img-container" onclick="openLightbox('assets/sl_sonido_iluminacion.webp')">
+          <img class="tarjeta-img" src="assets/sl_sonido_iluminacion.webp" width="853" height="1280" alt="SL Sonido - Iluminación - Pantalla" loading="lazy">
           <div class="tarjeta-zoom-overlay">🔍 Ampliar</div>
         </div>
         <div class="tarjeta-info">
@@ -1014,18 +884,18 @@
           <p class="tarjeta-desc">
             Equipamiento profesional de sonido, iluminación y pantallas LED para todo tipo de eventos: shows en vivo, eventos sociales, empresariales, fiestas y escenarios en Jardín América.
           </p>
-          <a class="btn-wa-contact" href="#"
+          <a class="btn-wa-contact" href="https://wa.me/5493743475595?text=Hola! Vi tu tarjeta de SL Sonido en ITe y quería hacerte una consulta por un evento."
             onclick="irAContactar('5493743475595', 'Hola! Vi tu tarjeta de SL Sonido en ITe y quería hacerte una consulta por un evento.'); return false;">
             📲 Enviar WhatsApp
           </a>
         </div>
       </div>
 
-      <!-- Tarjeta 19: Rubén Seguridad Electrónica (Profesional) -->
+      <!-- Tarjeta 18: Rubén Seguridad Electrónica (Profesional) -->
       <div class="tarjeta-card" data-category="profesionales"
         data-keywords="ruben seguridad electronica camaras cctv videovigilancia hikvision redes internet wifi lan fibra optica ftth soporte tecnico computacion pc starlink antena instalacion jardin america misiones">
-        <div class="tarjeta-img-container" onclick="openLightbox('assets/ruben_seguridad_electronica.jpg')">
-          <img class="tarjeta-img" src="assets/ruben_seguridad_electronica.jpg" alt="Rubén Seguridad Electrónica" loading="lazy">
+        <div class="tarjeta-img-container" onclick="openLightbox('assets/ruben_seguridad_electronica.webp')">
+          <img class="tarjeta-img" src="assets/ruben_seguridad_electronica.webp" width="853" height="1280" alt="Rubén Seguridad Electrónica" loading="lazy">
           <div class="tarjeta-zoom-overlay">🔍 Ampliar</div>
         </div>
         <div class="tarjeta-info">
@@ -1034,7 +904,7 @@
           <p class="tarjeta-desc">
             Instalación y mantenimiento de cámaras de seguridad (CCTV), redes LAN/WiFi, fibra óptica, soporte técnico de equipos informáticos e instalación de antenas Starlink en Jardín América.
           </p>
-          <a class="btn-wa-contact" href="#"
+          <a class="btn-wa-contact" href="https://wa.me/5493743436708?text=Hola! Vi tu tarjeta de Rubén Seguridad Electrónica en ITe y quería hacerte una consulta."
             onclick="irAContactar('5493743436708', 'Hola! Vi tu tarjeta de Rubén Seguridad Electrónica en ITe y quería hacerte una consulta.'); return false;">
             📲 Enviar WhatsApp
           </a>
@@ -1057,7 +927,7 @@
         Si sos profesional, tenés un comercio, prestás algún servicio o tenés un emprendimiento en Jardín América,
         sumate de forma completamente gratuita.
       </p>
-      <a class="btn-sumar" href="#" onclick="irAlAdmin('Hola! Quiero publicar mi tarjeta'); return false;">
+      <a class="btn-sumar" href="https://wa.me/5493743454291?text=Hola! Quiero publicar mi tarjeta" onclick="irAlAdmin('Hola! Quiero publicar mi tarjeta'); return false;">
         📲 Sumar mi Tarjeta Gratis
       </a>
     </div>
@@ -1065,10 +935,10 @@
   </main>
 
   <!-- ── Lightbox Modal ────────────────────────────────────── -->
-  <div class="lightbox" id="lightbox" onclick="closeLightbox()">
+  <div class="lightbox" id="lightbox" role="dialog" aria-modal="true" aria-label="Vista ampliada de la tarjeta" onclick="closeLightbox()">
     <div class="lightbox-content" onclick="event.stopPropagation()">
-      <button class="lightbox-close" onclick="closeLightbox()">&times;</button>
-      <img class="lightbox-img" id="lightbox-img" src="" alt="Vista ampliada">
+      <button class="lightbox-close" onclick="closeLightbox()" aria-label="Cerrar imagen ampliada">&times;</button>
+      <img class="lightbox-img" id="lightbox-img" src="" alt="Vista ampliada de la tarjeta">
     </div>
   </div>
 
@@ -1089,45 +959,17 @@
   </footer>
 
   <!-- ── Lógica Interactiva (JavaScript) ───────────────────────── -->
+  <script src="assets/app.js"></script>
   <script>
-    // Configuración de redirección de WhatsApp
-    function _abrirWA(numero, texto) {
-      const url = `https://wa.me/${numero}?text=${encodeURIComponent(texto)}`;
-      window.open(url, '_blank', 'noopener');
-    }
-
-    // Redirige al número del administrador
-    function irAlAdmin(texto) {
-      _abrirWA(WA_ADMIN, texto);
-    }
-
-    // Redirige a números específicos de tarjetas
-    function irAContactar(numero, texto) {
-      _abrirWA(numero, texto);
-    }
-
     // --- Buscador y Filtros ---
     const searchInput = document.getElementById('search-input');
     const filterButtons = document.querySelectorAll('.btn-filter');
     const tarjetaCards = document.querySelectorAll('.tarjeta-card');
     const noResults = document.getElementById('no-results');
+    const resultCount = document.getElementById('result-count');
 
-    // Mezcla aleatoria de tarjetas (Fisher-Yates Shuffle)
-    function mezclarTarjetas() {
-      const grid = document.getElementById('tablero-grid');
-      if (!grid) return;
-      const cards = Array.from(grid.querySelectorAll('.tarjeta-card'));
-      
-      for (let i = cards.length - 1; i > 0; i--) {
-        const j = Math.floor(Math.random() * (i + 1));
-        [cards[i], cards[j]] = [cards[j], cards[i]];
-      }
-      
-      cards.forEach(card => grid.insertBefore(card, noResults));
-    }
-
-    // Ejecutar mezcla al inicializar
-    mezclarTarjetas();
+    const totalTarjetas = tarjetaCards.length;
+    resultCount.textContent = totalTarjetas + ' resultados';
 
     let currentCategory = 'todos';
     let searchQuery = '';
@@ -1184,6 +1026,9 @@
       } else {
         noResults.style.display = 'none';
       }
+
+      // Contador de resultados
+      resultCount.textContent = matchCount + ' de ' + totalTarjetas + ' resultados';
     }
 
     // --- Lightbox / Modal de Zoom para las tarjetas ---
@@ -1194,6 +1039,8 @@
       lightboxImg.src = imgSrc;
       lightbox.classList.add('active');
       document.body.style.overflow = 'hidden'; // Previene scroll de fondo
+      const closeBtn = lightbox.querySelector('.lightbox-close');
+      if (closeBtn) closeBtn.focus();
     }
 
     function closeLightbox() {

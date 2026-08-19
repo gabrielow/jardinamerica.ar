@@ -1,0 +1,17 @@
+# Instaladores y binarios
+*.exe
+*.msi
+*.dmg
+
+# Sistemas operativos
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Editores / IDEs
+.vscode/
+.idea/
+
+# Archivos temporales
+*.tmp
+*.log
