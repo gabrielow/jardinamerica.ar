@@ -1,0 +1,37 @@
+{
+  "slug": "nombre_apellido",
+  "nombre": "Nombre y Apellido",
+  "cargo": "Profesión o Puesto",
+  "subtitulo": "Especialidad 1 · Especialidad 2 · Especialidad 3",
+  "foto_path": "ruta/a/la/foto.png",
+  "perfil_lineas": [
+    "Descripción breve del perfil profesional respetando",
+    "fielmente los datos aportados por el postulante.",
+    "Orientado a transmitir claridad, seriedad y compromiso."
+  ],
+  "habilidades": [
+    "Habilidad o Aptitud 1",
+    "Habilidad o Aptitud 2",
+    "Habilidad o Aptitud 3",
+    "Habilidad o Aptitud 4",
+    "Habilidad o Aptitud 5"
+  ],
+  "experiencias": [
+    {
+      "empresa": "Nombre Empresa o Institución",
+      "fechas": "Año Inicio - Año Fin",
+      "rol": "Puesto desempeñado",
+      "desc": "Responsabilidades principales resumidas."
+    }
+  ],
+  "educacion": [
+    "Título o Nivel Educativo — Institución (Año)",
+    "Curso o Capacitación — Institución (Año)"
+  ],
+  "telefono_display": "+54 9 3743 000000",
+  "telefono_wa": "5493743000000",
+  "email": "correo@ejemplo.com",
+  "direccion": "Localidad o Barrio",
+  "descripcion_tarjeta": "Síntesis clara para la tarjeta del tablero. Máximo 2 o 3 oraciones destacando experiencia y valor.",
+  "keywords": "nombre apellido cv curriculum vitae profesion rubro especialidad jardin america misiones"
+}

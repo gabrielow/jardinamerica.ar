@@ -13,3 +13,8 @@
    - Incluir un atributo `data-keywords` amplio, en minúsculas y sin acentos, para el correcto funcionamiento del buscador local.
    - Configurar el visor de imagen lightbox con `onclick="openLightbox('assets/...')"` y la etiqueta `<img>` con `loading="lazy"`.
    - Formatear el botón de contacto de WhatsApp llamando a `irAContactar('549...', 'Mensaje inicial...')`.
+
+## Generación Estandarizada de Tarjetas de CV
+- Para tarjetas de postulantes (`data-category="cvs"`), utilizar la herramienta modular en `herramientas/generador_cv.py`.
+- Genera automáticamente los activos gráficos en WebP y JPEG (1024x1024 px, mobile-first, paleta ITe) y el bloque HTML listo para insertar en `tablero.html`.
+- Ver documentación y plantilla en `herramientas/README.md` y `herramientas/cv_plantilla.json`.
